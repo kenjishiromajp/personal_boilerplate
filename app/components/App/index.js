@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import PostPage from '../../containers/PostPage/index';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+// import { Provider } from 'react-redux';
+import PostPage from '../../containers/PostPage/loadable';
+import ContactPage from '../../containers/ContactPage/loadable';
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1>Hello World!</h1>
-        <PostPage />
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={PostPage} />
+          <Route exact path="/contact" component={ContactPage} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

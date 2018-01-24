@@ -13,6 +13,12 @@
       "postId": 1
     }
   ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Kenji"
+    }
+  ],
   "profile": {
     "name": "typicode"
   }

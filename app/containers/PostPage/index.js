@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Icon} from 'antd';
+import { Button, Icon } from 'antd';
 
 class PostPage extends Component {
   state = {
