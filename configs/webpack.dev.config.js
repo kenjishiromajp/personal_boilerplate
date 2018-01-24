@@ -1,8 +1,8 @@
 const path = require('path');
-const fs = require('fs');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
@@ -21,6 +21,7 @@ const plugins = [
     exclude: /a\.js|node_modules/, // exclude node_modules
     failOnError: false, // show a warning when there is a circular dependency
   }),
+  new BundleAnalyzerPlugin(),
 ];
 
 module.exports = require('./_webpack.base.config.js')({

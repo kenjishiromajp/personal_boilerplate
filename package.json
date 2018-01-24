@@ -5,6 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development node server",
+    "jsonserver": "json-server --watch test-db.json --port 3004",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -127,10 +128,63 @@
       }
     }
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "app/**/*.{js,jsx}",
+      "!app/**/*.test.{js,jsx}",
+      "!app/*/RbGenerated*/*.{js,jsx}",
+      "!app/app.js",
+      "!app/global-styles.js",
+      "!app/*/*/Loadable.{js,jsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 98,
+        "branches": 91,
+        "functions": 98,
+        "lines": 98
+      }
+    },
+    "moduleDirectories": [
+      "node_modules",
+      "app"
+    ],
+    "moduleNameMapper": {
+      ".*\\.(css|less|styl|scss|sass)$": "<rootDir>/internals/mocks/cssModule.js",
+      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/image.js"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bundler.js",
+    "testRegex": "tests/.*\\.test\\.js$"
+  },
+  "dependencies": {
+    "antd": "^3.1.4",
+    "chalk": "^2.3.0",
+    "circular-dependency-plugin": "^4.4.0",
+    "compression": "^1.7.1",
+    "cross-env": "^5.1.3",
+    "eventsource-polyfill": "^0.9.6",
+    "express": "^4.16.2",
+    "html-webpack-plugin": "^2.30.1",
+    "ip": "^1.1.5",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "less-vars-to-js": "^1.2.1",
+    "minimist": "^1.2.0",
+    "offline-plugin": "^4.9.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "redux-saga": "^0.16.0",
+    "styled-components": "^2.4.0",
+    "webpack": "^3.10.0",
+    "whatwg-fetch": "^2.0.3"
+  },
   "devDependencies": {
+    "webpack-bundle-analyzer": "^2.9.2",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-import": "^1.6.3",
     "babel-plugin-react-intl": "^2.3.1",
     "babel-plugin-react-transform": "^3.0.0",
     "babel-plugin-styled-components": "^1.4.0",
@@ -142,30 +196,20 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.9",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-redux-saga": "^0.6.0",
     "file-loader": "^1.1.6",
     "html-loader": "^0.5.5",
     "image-webpack-loader": "^3.4.2",
     "json-loader": "^0.5.7",
+    "json-server": "^0.12.1",
     "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
     "webpack-dev-middleware": "^2.0.4",
-    "webpack-hot-middleware": "^2.21.0",
-    "url-loader": "^0.6.2"
-  },
-  "dependencies": {
-    "chalk": "^2.3.0",
-    "circular-dependency-plugin": "^4.4.0",
-    "compression": "^1.7.1",
-    "cross-env": "^5.1.3",
-    "eventsource-polyfill": "^0.9.6",
-    "express": "^4.16.2",
-    "html-webpack-plugin": "^2.30.1",
-    "ip": "^1.1.5",
-    "minimist": "^1.2.0",
-    "offline-plugin": "^4.9.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "styled-components": "^2.4.0",
-    "webpack": "^3.10.0",
-    "whatwg-fetch": "^2.0.3"
+    "webpack-hot-middleware": "^2.21.0"
   }
 }
