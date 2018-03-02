@@ -13,15 +13,14 @@ const customHost = arguments.host || process.env.HOST;
 const host = customHost || null;
 const prettyHost = customHost || 'localhost';
 
-
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
-  publicPath: '/',
+  publicPath: '/'
 });
 
 app.listen(port, host, err => {
   if (err) {
     return logger.error(err.message);
   }
-  logger.appStarted(port,prettyHost);
+  logger.appStarted(port, prettyHost);
 });

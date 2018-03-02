@@ -1,7 +1,5 @@
 import { fromJS } from 'immutable';
-import {
-  DEFAULT_ACTION,
-} from './contants';
+import { DEFAULT_ACTION } from './contants';
 
 const initialState = fromJS({});
 

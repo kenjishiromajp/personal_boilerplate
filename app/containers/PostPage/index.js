@@ -4,7 +4,7 @@ import { Button, Icon } from 'antd';
 class PostPage extends Component {
   state = {
     name: '',
-  }
+  };
   render() {
     return (
       <div>

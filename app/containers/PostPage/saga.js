@@ -2,8 +2,8 @@
 
 // Individual exports for testing
 export default function* defaultSaga() {
-  yield takeEvery(GET_ALL_POSTS, getAllPosts)
+  yield takeEvery(GET_ALL_POSTS, getAllPosts);
 }
-export function* getAllPosts(){
-  yield
+export function* getAllPosts() {
+  yield;
 }

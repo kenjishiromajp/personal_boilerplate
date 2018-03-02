@@ -4,9 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 
 module.exports = require('./_webpack.base.config')({
-  entry: [
-    path.join(process.cwd(), 'app/index.js'),
-  ],
+  entry: [path.join(process.cwd(), 'app/index.js')],
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
@@ -48,6 +46,7 @@ module.exports = require('./_webpack.base.config')({
     }),
   ],
   performance: {
-    assetFilter: (assetFilename) => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
+    assetFilter: (assetFilename) =>
+      !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
   },
 });
