@@ -1,0 +1,3 @@
+export const LOGIN_USER = 'App/LOGIN_USER';
+export const LOGIN_USER_SUCCESS = 'App/LOGIN_USER_SUCCESS';
+export const LOGIN_USER_ERROR = 'App/LOGIN_USER_ERROR';
