@@ -12,7 +12,10 @@ const host = customHost || 'localhost';
 themeVariables['@icon-url'] = `'//${host}:${port}/fonts/iconfont'`;
 
 module.exports = (options) => ({
-  entry: options.entry,
+  entry: [
+    ...options.entry,
+    'babel-polyfill',
+  ],
   output: Object.assign(
     {
       path: path.resolve(process.cwd(), 'build'),

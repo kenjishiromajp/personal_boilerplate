@@ -1,9 +1,16 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
+import request from '../../utils/request';
+import { LOAD_POSTS } from './contants';
+import { loadPostsError, postsLoaded } from './actions';
 
-// Individual exports for testing
-export default function* defaultSaga() {
-  yield takeEvery(GET_ALL_POSTS, getAllPosts);
+export default function* postsData() {
+  yield takeLatest(LOAD_POSTS, getAllPosts);
 }
 export function* getAllPosts() {
-  yield;
+  try {
+    const posts = yield call(request, 'http://localhost:3004/posts');
+    yield put(postsLoaded(posts));
+  } catch (error) {
+    yield put(loadPostsError(error));
+  }
 }
