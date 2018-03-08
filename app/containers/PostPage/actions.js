@@ -1,4 +1,4 @@
-import { LOAD_POSTS, LOAD_POSTS_ERROR, LOAD_POSTS_SUCCESS } from './contants';
+import { LOAD_POSTS, LOAD_POSTS_ERROR, LOAD_POSTS_SUCCESS } from './constants';
 
 export function loadPosts() {
   return {

@@ -1,0 +1,16 @@
+import { takeLatest, call, put } from 'redux-saga/effects';
+import request from '../../utils/request';
+import { LOAD_{{ constantCase name }}S } from './constants';
+import { load{{ properCase name }}sError, {{ camelCase name }}sLoaded } from './actions';
+
+export default function* {{ camelCase name }}Data() {
+  yield takeLatest(LOAD_{{ constantCase name }}S, getAll{{ properCase name }});
+}
+export function* getAll{{ properCase name }}() {
+  try {
+    const {{ camelCase name }}s = yield call(request, 'http://localhost:3004/{{ lowerCase name }}');
+    yield put({{ camelCase name }}sLoaded({{ camelCase name }}s));
+  } catch (error) {
+    yield put(load{{ properCase name }}sError(error));
+  }
+}

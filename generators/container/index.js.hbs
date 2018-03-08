@@ -1,0 +1,53 @@
+/**
+*
+* {{ properCase name }}
+*
+*/
+
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import injectReducer from '../../utils/injectReducer';
+import injectSaga from '../../utils/injectSaga';
+import reducer from './reducer';
+import saga from './saga';
+import { makeSelect{{ properCase name }}s } from './selectors';
+import { load{{ properCase name }}s } from './actions';
+
+class {{ properCase name }} extends Component {
+  state = {
+  };
+  componentDidMount() {
+    // this.props.load{{ properCase name }}s();
+  }
+  render() {
+    return (
+      <div>
+        <h1>{{ properCase name }}</h1>
+      </div>
+    );
+  }
+}
+
+{{ properCase name }}.propTypes = {
+
+};
+
+const mapStateToProps = createStructuredSelector({
+  posts: makeSelect{{ properCase name }}s(),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  load{{ properCase name }}s: () => dispatch(load{{ pascalCase name }}s()),
+});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withReducer = injectReducer({ key: '{{ camelCase name }}s', reducer });
+const withSaga = injectSaga({ key: '{{ camelCase name }}s', saga });
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)({{ properCase name }});

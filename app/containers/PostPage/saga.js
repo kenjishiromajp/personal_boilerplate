@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import request from '../../utils/request';
-import { LOAD_POSTS } from './contants';
+import { LOAD_POSTS } from './constants';
 import { loadPostsError, postsLoaded } from './actions';
 
 export default function* postsData() {

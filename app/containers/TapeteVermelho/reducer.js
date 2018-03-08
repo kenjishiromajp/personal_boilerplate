@@ -1,26 +1,26 @@
 import { fromJS } from 'immutable';
 import {
-  LOAD_POSTS,
-  LOAD_POSTS_SUCCESS,
-  LOAD_POSTS_ERROR,
+  LOAD_TAPETE_VERMELHOS,
+  LOAD_TAPETE_VERMELHOS_SUCCESS,
+  LOAD_TAPETE_VERMELHOS_ERROR,
 } from './constants';
 
 const initialState = fromJS({
   loading: false,
   error: null,
-  posts: [],
+  tapeteVermelho: [],
 });
 
-function postReducer(state = initialState, action) {
+function tapeteVermelhoReducer(state = initialState, action) {
   switch (action.type) {
-    case LOAD_POSTS:
+    case LOAD_TAPETE_VERMELHOS:
       return state
         .set('loading',true);
-    case LOAD_POSTS_SUCCESS:
+    case LOAD_TAPETE_VERMELHOS_SUCCESS:
       return state
         .set('loading',false)
-        .set('posts', action.posts);
-    case LOAD_POSTS_ERROR:
+        .set('tapeteVermelhos', action.tapeteVermelho);
+    case LOAD_TAPETE_VERMELHOS_ERROR:
       return state
         .set('loading',false)
         .set('error',action.error);
@@ -29,4 +29,4 @@ function postReducer(state = initialState, action) {
   }
 }
 
-export default postReducer;
+export default tapeteVermelhoReducer;

@@ -7,7 +7,8 @@
     "start": "cross-env NODE_ENV=development node server",
     "jsonserver": "json-server --watch test-db.json --port 3004",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier-eslint --write app/**/*.js server/**/*.js"
+    "format": "prettier-eslint --write app/**/*.js server/**/*.js",
+    "generate": "plop --plopfile generators/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -176,6 +177,7 @@
     "less-vars-to-js": "^1.2.1",
     "minimist": "^1.2.0",
     "offline-plugin": "^4.9.0",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-loadable": "^5.3.1",
