@@ -6,6 +6,7 @@ import createHistory from 'history/createBrowserHistory';
 import PostPage from '../PostPage/loadable';
 import ContactPage from '../ContactPage/loadable';
 import configureStore from '../../store';
+import DefaultLayout from '../../layouts/DefaultLayout/index';
 
 const history = createHistory();
 const initialState = {};
@@ -18,7 +19,7 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route exact path="/" component={PostPage} />
+            <DefaultLayout exact path="/" component={PostPage} />
             <Route exact path="/contact" component={ContactPage} />
           </Switch>
         </ConnectedRouter>

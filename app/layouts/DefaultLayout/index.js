@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
 const DefaultLayout = ({ component: Component, ...rest }) => (
@@ -13,5 +14,9 @@ const DefaultLayout = ({ component: Component, ...rest }) => (
     )}
   />
 );
+
+DefaultLayout.propTypes = {
+  component: PropTypes.instanceOf(React.Component).isRequired,
+};
 
 export default DefaultLayout;
