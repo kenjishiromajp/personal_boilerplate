@@ -1,7 +1,11 @@
 import { createSelector } from 'reselect';
+import transformObjectToArray from '../../utils/transformObjectToArray';
 
 export const select{{ properCase name }}s = (state) => state.get('{{ camelCase name }}s');
 export const makeSelect{{ properCase name }}s = () => createSelector(
   select{{ properCase name }}s,
-  ({{ camelCase name }}State) => {{ camelCase name }}State.get('{{ camelCase name }}s')
+  ({{ camelCase name }}State) => {
+    const {{ camelCase name }}s = {{ camelCase name }}State.get('{{ camelCase name }}s');
+    return ({{ camelCase name }}s === null) ? null : transformObjectToArray({{ camelCase name }}s);
+  }
 );

@@ -10,7 +10,7 @@ module.exports = function (plop) {
     actions: [{
       type: 'add',
       path: '../app/components/{{properCase name}}/index.js',
-      templateFile: './component.js.hbs',
+      templateFile: './component/index.js.hbs',
       abortOnFail: true,
     }],
   });
@@ -44,6 +44,12 @@ module.exports = function (plop) {
         type: 'add',
         path: '../app/containers/{{properCase name}}/loadable.js',
         templateFile: './container/loadable.js.hbs',
+        abortOnFail: true,
+      },
+      {
+        type: 'add',
+        path: '../app/containers/{{properCase name}}/normalizr.js',
+        templateFile: './container/normalizr.js.hbs',
         abortOnFail: true,
       },
       {

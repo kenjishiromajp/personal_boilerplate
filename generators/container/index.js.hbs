@@ -22,21 +22,27 @@ class {{ properCase name }} extends Component {
   componentDidMount() {
     // this.props.load{{ properCase name }}s();
   }
+  render{{ properCase name }}s = () => {
+    const { {{ camelCase name }}s } = this.props;
+    if ({{ camelCase name }}s === null) { return <div>Empty State</div>; }
+    return {{ camelCase name }}s.map(({{ camelCase name }}) => <div key={ {{ camelCase name }}.id } >{ {{ properCase name }}.title }</div>);
+  }
   render() {
     return (
       <div>
         <h1>{{ properCase name }}</h1>
+        { /* this.render{{properCase name}}s() */ }
       </div>
     );
   }
 }
 
 {{ properCase name }}.propTypes = {
-
+  {{ camelCase name }}s: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
-  posts: makeSelect{{ properCase name }}s(),
+  {{ camelCase name }}s: makeSelect{{ properCase name }}s(),
 });
 
 const mapDispatchToProps = (dispatch) => ({

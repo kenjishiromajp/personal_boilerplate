@@ -3,6 +3,7 @@ import { Button, Icon } from 'antd';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import PropTypes from 'prop-types';
 import reducer from './reducer';
 import saga from './saga';
 import injectReducer from '../../utils/injectReducer';
@@ -14,8 +15,13 @@ class PostPage extends Component {
   state = {
     name: '',
   };
-  componentDidMount(){
+  componentDidMount() {
     this.props.loadPosts();
+  }
+  renderPosts = () => {
+    const { posts } = this.props;
+    if (posts === null) { return <div>Empty State</div>; }
+    return posts.map((post) => <div key={post.id}>{post.title}</div>);
   }
   render() {
     return (
@@ -24,11 +30,16 @@ class PostPage extends Component {
         <small>{this.state.name}</small>
         <Icon type="link" />
         <Button type="primary">Legal</Button>
-        {this.props.posts.map((post) => <div>{post.title}</div>)}
+        { this.renderPosts() }
       </div>
     );
   }
 }
+
+PostPage.propTypes = {
+  posts: PropTypes.array,
+  loadPosts: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = createStructuredSelector({
   posts: makeSelectPosts(),
