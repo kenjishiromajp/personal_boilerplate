@@ -15,7 +15,7 @@ function {{ camelCase name }}Reducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_{{ constantCase name }}S:
       return state
-        .set('loading', true);
+        .set('loading', true)
         .set('error', null);
     case LOAD_{{ constantCase name }}S_SUCCESS:
       return state
