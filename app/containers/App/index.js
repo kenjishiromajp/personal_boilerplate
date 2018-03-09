@@ -7,6 +7,7 @@ import PostPage from '../PostPage/loadable';
 import ContactPage from '../ContactPage/loadable';
 import configureStore from '../../store';
 import DefaultLayout from '../../layouts/DefaultLayout/index';
+import './style.less';
 
 const history = createHistory();
 const initialState = {};

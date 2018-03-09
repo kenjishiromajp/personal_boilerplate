@@ -1,22 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
+import { Layout } from 'antd';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import './style.less';
+import MySidebar from './components/MySidebar';
+import MyHeader from './components/MyHeader';
+import { toggleSidebar } from './actions';
+import { makeSelectSidebarOpened } from './selector';
 
-const DefaultLayout = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(matchProps) => (
-      <div className="DefaultLayout">
-        <div className="Header">Header</div>
-        <Component {...matchProps} />
-        <div className="Footer">Footer</div>
-      </div>
-    )}
-  />
-);
+const { Content } = Layout;
+class DefaultLayout extends React.Component {
+  render() {
+    const { component: Component, ...rest } = this.props;
+    return (
+      <Route
+        {...rest}
+        render={(matchProps) => (
+          <div className="default-layout">
+            <Layout>
+              <MySidebar opened={this.props.sidebarOpened} />
+              <Layout>
+                <MyHeader />
+                <Content>
+                  <Component {...matchProps} />
+                </Content>
+              </Layout>
+            </Layout>
+          </div>
+        )}
+      />
+    );
+  }
+}
 
 DefaultLayout.propTypes = {
-  component: PropTypes.instanceOf(React.Component).isRequired,
+  component: PropTypes.oneOfType([PropTypes.instanceOf(React.Component), PropTypes.func]).isRequired,
 };
 
-export default DefaultLayout;
+const mapStateToProps = createStructuredSelector({
+  sidebarOpened: makeSelectSidebarOpened(),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  toggleSidebar: () => dispatch(toggleSidebar()),
+});
+
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+export default compose(withConnect)(DefaultLayout);
