@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { Button, Icon } from 'antd';
+import { Button, Card, Icon } from 'antd';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import reducer from './reducer';
 import saga from './saga';
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
-import { makeSelectPosts } from './selectors';
+import { makeSelectPosts, makeSelectPostsLoading } from './selectors';
 import { loadPosts } from './actions';
 
 class PostPage extends Component {
@@ -23,14 +24,23 @@ class PostPage extends Component {
     if (posts === null) { return <div>Empty State</div>; }
     return posts.map((post) => <div key={post.id}>{post.title}</div>);
   }
+  renderHead() {
+    return (
+      <Helmet>
+        <title>Post Page</title>
+      </Helmet>
+    );
+  }
   render() {
+    const { renderHead } = this;
+    const { loading } = this.props;
     return (
       <div>
+        { renderHead() }
         <h1>Post Page!</h1>
-        <small>{this.state.name}</small>
-        <Icon type="link" />
-        <Button type="primary">Legal</Button>
-        { this.renderPosts() }
+        <Card loading={loading} >
+          { this.renderPosts() }
+        </Card>
       </div>
     );
   }
@@ -38,11 +48,13 @@ class PostPage extends Component {
 
 PostPage.propTypes = {
   posts: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
   loadPosts: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   posts: makeSelectPosts(),
+  loading: makeSelectPostsLoading(),
 });
 
 const mapDispatchToProps = (dispatch) => ({

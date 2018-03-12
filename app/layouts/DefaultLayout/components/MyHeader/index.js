@@ -10,6 +10,9 @@ const MyHeader = ({ children }) => (
   </Header>
 );
 MyHeader.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
 }
 export default MyHeader;

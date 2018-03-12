@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
@@ -23,7 +23,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <Switch>
             <DefaultLayout exact path="/" component={PostPage} />
-            <Route exact path="/contact" component={ContactPage} />
+            <DefaultLayout exact path="/contact" component={ContactPage} />
           </Switch>
         </ConnectedRouter>
       </Provider>
