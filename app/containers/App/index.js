@@ -7,6 +7,7 @@ import PostPage from '../PostPage/loadable';
 import ContactPage from '../ContactPage/loadable';
 import configureStore from '../../store';
 import DefaultLayout from '../../layouts/DefaultLayout/index';
+import PrivateDefaultLayout from '../../layouts/PrivateDefaultLayout/index';
 import './fileLoads';
 import './style.less';
 
@@ -15,6 +16,9 @@ const initialState = {};
 
 const store = configureStore(initialState, history);
 
+const Login = ()=>(
+  <h1>Login!</h1>
+);
 
 class App extends Component {
   render() {
@@ -22,7 +26,8 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            <DefaultLayout exact path="/" component={PostPage} />
+            <PrivateDefaultLayout exact path="/" component={PostPage} />
+            <DefaultLayout exact path="/login" component={Login} />
             <DefaultLayout exact path="/contact" component={ContactPage} />
           </Switch>
         </ConnectedRouter>

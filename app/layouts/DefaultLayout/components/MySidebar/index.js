@@ -2,24 +2,12 @@ import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
 import PropTypes from 'prop-types';
 import MyMenuItem from '../MyMenuItem/index';
+import getMenuItems from './getMenuItems';
 const { Sider } = Layout;
-
-const MENU_ITEMS = [
-  {
-    to: '/',
-    title: 'Home',
-    icon: 'home',
-  },
-  {
-    to: '/contact',
-    title: 'Contact',
-    icon: 'phone',
-  },
-];
 
 class MySidebar extends Component {
   renderMenuItems() {
-    return MENU_ITEMS.map((menuItem) =>
+    return getMenuItems().map((menuItem) =>
       (
         <Menu.Item key={menuItem.to}>
           <MyMenuItem {...menuItem} />

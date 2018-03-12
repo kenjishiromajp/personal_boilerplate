@@ -4,9 +4,8 @@ import { CLOSE_SIDEBAR, OPEN_SIDEBAR, TOGGLE_SIDEBAR } from '../../layouts/Defau
 const initialState = fromJS({
   loading: false,
   error: false,
-  currentUser: false,
+  currentUser: {},
   sidebarOpened: true,
-  userData: {},
 });
 
 function appReducer(state = initialState, action) {
@@ -16,12 +15,12 @@ function appReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['userData'], false);
+        .set('currentUser', {});
     case LOGIN_USER_SUCCESS:
       return state
         .set('loading', false)
         .set('error', false)
-        .set('currentUser', action.username);
+        .set('currentUser', action.user);
     case LOGIN_USER_ERROR:
       return state
         .set('loading', false)

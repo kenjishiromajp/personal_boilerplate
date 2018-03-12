@@ -9,10 +9,11 @@ export const makeSelectPostsLoading = () => createSelector(
     return postState.get('loading');
   }
 );
+
 export const makeSelectPosts = () => createSelector(
   selectPosts,
   (postState) => {
     const posts = postState.get('posts');
-    return (posts === null) ? null : transformObjectToArray(posts);
+    return (posts) ? transformObjectToArray(posts) : null ;
   }
 );

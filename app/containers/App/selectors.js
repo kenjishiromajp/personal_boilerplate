@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 export const selectGlobal = (state) => state.get('global');
 export const selectRouter = (state) => state.get('router');
 
-export const makeSelectCurrentUser = createSelector(
+export const makeSelectCurrentUser = () => createSelector(
   selectGlobal,
   (globalState) => globalState.get('currentUser')
 );
