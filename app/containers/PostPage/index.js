@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Icon } from 'antd';
+import { Card } from 'antd';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -13,9 +13,6 @@ import { makeSelectPosts, makeSelectPostsLoading } from './selectors';
 import { loadPosts } from './actions';
 
 class PostPage extends Component {
-  state = {
-    name: '',
-  };
   componentDidMount() {
     this.props.loadPosts();
   }

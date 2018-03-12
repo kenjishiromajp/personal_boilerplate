@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { Helmet } from 'react-helmet';
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import reducer from './reducer';
@@ -27,9 +28,18 @@ class {{ properCase name }} extends Component {
     if ({{ camelCase name }}s === null) { return <div>Empty State</div>; }
     return {{ camelCase name }}s.map(({{ camelCase name }}) => <div key={ {{ camelCase name }}.id } >{ {{ properCase name }}.title }</div>);
   }
+  renderHead() {
+    return (
+      <Helmet>
+        <title>{{ properName name }}</title>
+      </Helmet>
+    );
+  }
   render() {
+    const { renderHead } = this;
     return (
       <div>
+        { renderHead() }
         <h1>{{ properCase name }}</h1>
         { /* this.render{{properCase name}}s() */ }
       </div>
@@ -39,14 +49,18 @@ class {{ properCase name }} extends Component {
 
 {{ properCase name }}.propTypes = {
   {{ camelCase name }}s: PropTypes.array,
+  posts: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+  // load{{ properName name }}: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   {{ camelCase name }}s: makeSelect{{ properCase name }}s(),
+  loading: makeSelect{{ properName name }}sLoading(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  load{{ properCase name }}s: () => dispatch(load{{ pascalCase name }}s()),
+  // load{{ properCase name }}s: () => dispatch(load{{ pascalCase name }}s()),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
