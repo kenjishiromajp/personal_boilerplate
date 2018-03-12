@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
-import { Layout, Menu } from 'antd';
+import { Link } from 'react-router-dom';
+import { Icon, Layout, Menu } from 'antd';
+import PropTypes from 'prop-types';
 const { Sider } = Layout;
 
 class MySidebar extends Component {
   render() {
-    return(
+    const { opened } = this.props;
+    return (
       <Sider
         trigger={null}
         collapsible
-        collapsed={this.props.sidebarOpened}
+        collapsed={!opened}
       >
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
           <Menu.Item key="1">
-            <span>nav 1</span>
+            <Link to="/">
+              <Icon type="home" />
+              <span>Home</span>
+            </Link>
           </Menu.Item>
           <Menu.Item key="2">
-            <span>nav 2</span>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <span>nav 3</span>
+            <Link to="/contact">
+              <Icon type="phone" />
+              <span>Contact</span>
+            </Link>
           </Menu.Item>
         </Menu>
       </Sider>
     );
   }
 }
+MySidebar.propTypes = {
+  opened: PropTypes.bool.isRequired,
+};
 export default MySidebar;

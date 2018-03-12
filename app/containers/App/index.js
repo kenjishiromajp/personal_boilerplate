@@ -7,12 +7,14 @@ import PostPage from '../PostPage/loadable';
 import ContactPage from '../ContactPage/loadable';
 import configureStore from '../../store';
 import DefaultLayout from '../../layouts/DefaultLayout/index';
+import './fileLoads';
 import './style.less';
 
 const history = createHistory();
 const initialState = {};
 
 const store = configureStore(initialState, history);
+
 
 class App extends Component {
   render() {

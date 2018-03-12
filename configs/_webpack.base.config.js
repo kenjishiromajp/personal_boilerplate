@@ -5,11 +5,9 @@ const fs = require('fs');
 const lessToJs = require('less-vars-to-js');
 const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, '../app/ant-theme-vars.less'), 'utf8'));
 
-const port = parseInt(arguments.port || process.env.PORT || '3000', 10);
-const customHost = arguments.host || process.env.HOST;
-const host = customHost || 'localhost';
-
-themeVariables['@icon-url'] = `'//${host}:${port}/fonts/iconfont'`;
+// const port = parseInt(arguments.port || process.env.PORT || '3000', 10);
+// const customHost = arguments.host || process.env.HOST;
+// const host = customHost || 'localhost';
 
 module.exports = (options) => ({
   entry: [

@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Layout } from 'antd';
 const { Header } = Layout;
 import './style.less';
 
-const MyHeader = (props) => (
+const MyHeader = ({ children }) => (
   <Header className="my-header" >
-    <h1>Header Maroto</h1>
+    { children }
   </Header>
 );
+MyHeader.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+}
 export default MyHeader;
