@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
+import LoginPage from '../LoginPage/loadable';
 import PostPage from '../PostPage/loadable';
 import ContactPage from '../ContactPage/loadable';
 import configureStore from '../../store';
@@ -16,10 +17,6 @@ const initialState = {};
 
 const store = configureStore(initialState, history);
 
-const Login = ()=>(
-  <h1>Login!</h1>
-);
-
 class App extends Component {
   render() {
     return (
@@ -27,7 +24,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <Switch>
             <PrivateDefaultLayout exact path="/" component={PostPage} />
-            <DefaultLayout exact path="/login" component={Login} />
+            <Route exact path="/login" component={LoginPage} />
             <DefaultLayout exact path="/contact" component={ContactPage} />
           </Switch>
         </ConnectedRouter>

@@ -10,7 +10,11 @@ export function getAuthHeaders() {
   return {};
 }
 
-export default function request(url, method = 'GET', _options = { headers: { 'Content-Type': 'application/json' } }) {
+export default function request(
+  url,
+  method = 'GET',
+  _options = { headers: { 'Content-Type': 'application/json' } }
+) {
   let options = _options;
   if (options.headers) {
     options = {
@@ -39,4 +43,29 @@ export default function request(url, method = 'GET', _options = { headers: { 'Co
       if (response.status === 204 || response.status === 205) return null;
       return response.json();
     });
+}
+
+export function post(
+  url,
+  body = {},
+  _options = { headers: { 'Content-Type': 'application/json' } }
+) {
+  let options = _options;
+  if (options.headers) {
+    options = {
+      ...options,
+      method: 'POST',
+      headers: {
+        ...getAuthHeaders(),
+        ...options.headers,
+      },
+    };
+  } else {
+    options = {
+      ...options,
+      method: 'POST',
+      headers: getAuthHeaders(),
+    };
+  }
+  return request(url, JSON.stringify(body), options);
 }

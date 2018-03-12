@@ -14,7 +14,7 @@ import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import reducer from './reducer';
 import saga from './saga';
-import { makeSelect{{ properCase name }}s } from './selectors';
+import { makeSelect{{ properCase name }}s, makeSelect{{ properCase name }}sLoading } from './selectors';
 import { load{{ properCase name }}s } from './actions';
 
 class {{ properCase name }} extends Component {
@@ -31,7 +31,7 @@ class {{ properCase name }} extends Component {
   renderHead() {
     return (
       <Helmet>
-        <title>{{ properName name }}</title>
+        <title>{{ properCase name }}</title>
       </Helmet>
     );
   }
@@ -51,12 +51,12 @@ class {{ properCase name }} extends Component {
   {{ camelCase name }}s: PropTypes.array,
   posts: PropTypes.array,
   loading: PropTypes.bool.isRequired,
-  // load{{ properName name }}: PropTypes.func.isRequired,
+  // load{{ properCase name }}: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   {{ camelCase name }}s: makeSelect{{ properCase name }}s(),
-  loading: makeSelect{{ properName name }}sLoading(),
+  loading: makeSelect{{ properCase name }}sLoading(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
