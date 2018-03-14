@@ -11,8 +11,8 @@ export const makeSelect{{ properCase name }}s = () => createSelector(
   }
 );
 
-export const makeSelect{{ properName name }}sLoading = () => createSelector(
-  select{{ properName name }},
+export const makeSelect{{ properCase name }}sLoading = () => createSelector(
+  select{{ properCase name }}s,
   ({{ camelCase name }}State) => {
     return {{ camelCase name }}State.get('loading');
   }

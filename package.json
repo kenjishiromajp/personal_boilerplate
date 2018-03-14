@@ -13,9 +13,6 @@
   "author": "",
   "license": "ISC",
   "babel": {
-    "plugins": [
-      "styled-components"
-    ],
     "presets": [
       [
         "env",
