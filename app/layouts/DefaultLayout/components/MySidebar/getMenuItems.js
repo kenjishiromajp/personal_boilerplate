@@ -10,6 +10,11 @@ const getMenuItems = () =>{
       title: 'Contact',
       icon: 'phone',
     },
+    {
+      to: '/login',
+      title: 'Login',
+      icon: 'user',
+    },
   ];
   return MENU_ITEMS;
 }

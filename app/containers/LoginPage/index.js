@@ -8,15 +8,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { Button, Checkbox, Form, Icon, Input } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { Helmet } from 'react-helmet';
-import injectReducer from '../../utils/injectReducer';
+
 import injectSaga from '../../utils/injectSaga';
-import reducer from './reducer';
+import { loginUser } from './actions';
 import saga from './saga';
+
 import './styles.less';
-import { Button, Checkbox, Form, Icon, Input } from "antd";
-import { loginUser } from "./actions";
+
 const FormItem = Form.Item;
 
 class LoginPage extends Component {
@@ -49,24 +50,18 @@ class LoginPage extends Component {
           <FormItem>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }],
-            })(
-              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-            )}
+            })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />)}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
               rules: [{ required: true, message: 'Please input your Password!' }],
-            })(
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-            )}
+            })(<Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />)}
           </FormItem>
           <FormItem>
             {getFieldDecorator('remember', {
               valuePropName: 'checked',
               initialValue: true,
-            })(
-              <Checkbox>Remember me</Checkbox>
-            )}
+            })(<Checkbox>Remember me</Checkbox>)}
             <a className="login-form-forgot" href="">Forgot password</a>
             <Button type="primary" htmlType="submit" className="login-form-button">
               Log in
@@ -86,15 +81,13 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: (username, password) => dispatch(loginUser(username, password))
+  loginUser: (username, password) => dispatch(loginUser(username, password)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = injectReducer({ key: 'loginPages', reducer });
 const withSaga = injectSaga({ key: 'loginPages', saga });
 export default compose(
   Form.create(),
-  withReducer,
   withSaga,
   withConnect,
 )(LoginPage);
