@@ -7,6 +7,7 @@ export default function* loginPagesData() {
   yield takeLatest(LOGIN_USER, getAllLoginUser);
 }
 
+
 export function* getAllLoginUser(action) {
   try {
     const { username, password } = action;

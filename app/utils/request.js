@@ -50,22 +50,29 @@ export function post(
   body = {},
   _options = { headers: { 'Content-Type': 'application/json' } }
 ) {
-  let options = _options;
-  if (options.headers) {
-    options = {
-      ...options,
-      method: 'POST',
-      headers: {
-        ...getAuthHeaders(),
-        ...options.headers,
-      },
-    };
-  } else {
-    options = {
-      ...options,
-      method: 'POST',
-      headers: getAuthHeaders(),
-    };
-  }
-  return request(url, JSON.stringify(body), options);
+  const options = {
+    ..._options,
+    body: JSON.stringify(body),
+  };
+  return request(url,'POST', options);
+}
+
+export function patch(
+  url,
+  body = {},
+  _options = { headers: { 'Content-Type': 'application/json' } }
+) {
+  const options = {
+    ..._options,
+    body: JSON.stringify(body),
+  };
+  return request(url, 'PATCH', options);
+}
+
+
+export function requestDelete(
+  url,
+  _options = { headers: { 'Content-Type': 'application/json' } }
+) {
+  return request(url, 'DELETE', _options);
 }
