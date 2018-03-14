@@ -12,9 +12,7 @@ import { Button, Checkbox, Form, Icon, Input } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { Helmet } from 'react-helmet';
 
-import injectSaga from '../../utils/injectSaga';
-import { loginUser } from './actions';
-import saga from './saga';
+import { login } from '../App/actions';
 
 import './styles.less';
 
@@ -35,7 +33,7 @@ class LoginPage extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const { username, password } = values;
-        this.props.loginUser(username, password);
+        this.props.login(username, password);
       }
     });
   }
@@ -81,13 +79,11 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: (username, password) => dispatch(loginUser(username, password)),
+  login: (username, password) => dispatch(login(username, password)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withSaga = injectSaga({ key: 'loginPages', saga });
 export default compose(
   Form.create(),
-  withSaga,
   withConnect,
 )(LoginPage);

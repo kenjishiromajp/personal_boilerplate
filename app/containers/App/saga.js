@@ -1,17 +1,18 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import request from '../../utils/request';
+import { post } from '../../utils/request';
+import { LOGIN } from './constants';
+import { loginError, loginSuccess } from './actions';
 
 export default function* getData() {
-  yield takeLatest('LOGIN', getLogin);
+  yield takeLatest(LOGIN, getLogin);
 }
 
-export function* getLogin() {
+export function* getLogin({ username, password }) {
   try {
-    // console.log('doido');
-    // let posts = yield call(request, 'http://localhost:3004/posts');
-    // posts = normalizePosts(posts).entities.posts;
-    // yield put(postsLoaded(posts));
+    post('http://localhost:3004/users');
+    const user = yield call(post, 'http://localhost:3004/users', { username, password } );
+    yield put(loginSuccess(user));
   } catch (error) {
-    // yield put(loadPostsError(error));
+    yield put(loginError(error));
   }
 }

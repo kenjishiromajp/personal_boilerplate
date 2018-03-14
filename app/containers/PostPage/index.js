@@ -10,7 +10,7 @@ import saga from './saga';
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import { makeSelectPosts, makeSelectPostsLoading } from './selectors';
-import { loadPosts } from './actions';
+import { loadPosts, removePost } from './actions';
 
 class PostPage extends Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ class PostPage extends Component {
   renderPosts = () => {
     const { posts } = this.props;
     if (posts === null) { return <div>Empty State</div>; }
-    return posts.map((post) => <div key={post.id}>{post.title}</div>);
+    return posts.map((post) => <div onClick={()=>this.props.removePost(post.id)} key={post.id}>{post.title}</div>);
   }
   renderHead() {
     return (
@@ -47,6 +47,7 @@ PostPage.propTypes = {
   posts: PropTypes.array,
   loading: PropTypes.bool.isRequired,
   loadPosts: PropTypes.func.isRequired,
+  removePost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -56,6 +57,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   loadPosts: () => dispatch(loadPosts()),
+  removePost: (id) => dispatch(removePost(id)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

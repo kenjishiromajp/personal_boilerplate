@@ -1,24 +1,24 @@
-import { LOGIN_USER, LOGIN_USER_ERROR, LOGIN_USER_SUCCESS } from '../App/constants';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR } from './constants';
 
-export function loginUser(username, password) {
+export function login(username, password) {
   return {
-    type: LOGIN_USER,
+    type: LOGIN,
     username,
     password,
   };
 }
 
-export function loginUserLoaded(loginPages) {
+export function loginSuccess(loginPages) {
   return {
-    type: LOGIN_USER_SUCCESS,
+    type: LOGIN_SUCCESS,
     loginPages,
   };
 }
 
 
-export function loginUserError(error) {
+export function loginError(error) {
   return {
-    type: LOGIN_USER_ERROR,
+    type: LOGIN_ERROR,
     error,
   };
 }

@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { LOGIN_USER, LOGIN_USER_SUCCESS, LOGIN_USER_ERROR } from './constants';
+import { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR } from './constants';
 import { CLOSE_SIDEBAR, OPEN_SIDEBAR, TOGGLE_SIDEBAR } from '../../layouts/DefaultLayout/constants';
 const initialState = fromJS({
   loading: false,
@@ -11,17 +11,17 @@ const initialState = fromJS({
 function appReducer(state = initialState, action) {
   const { type } = action;
   switch (type) {
-    case LOGIN_USER:
+    case LOGIN:
       return state
         .set('loading', true)
         .set('error', false)
         .set('currentUser', {});
-    case LOGIN_USER_SUCCESS:
+    case LOGIN_SUCCESS:
       return state
         .set('loading', false)
         .set('error', false)
         .set('currentUser', action.user);
-    case LOGIN_USER_ERROR:
+    case LOGIN_ERROR:
       return state
         .set('loading', false)
         .set('error', action.error);
