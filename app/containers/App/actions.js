@@ -8,10 +8,10 @@ export function login(username, password) {
   };
 }
 
-export function loginSuccess(loginPages) {
+export function loginSuccess(user) {
   return {
     type: LOGIN_SUCCESS,
-    loginPages,
+    user,
   };
 }
 

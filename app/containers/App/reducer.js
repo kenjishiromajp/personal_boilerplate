@@ -17,6 +17,7 @@ function appReducer(state = initialState, action) {
         .set('error', false)
         .set('currentUser', {});
     case LOGIN_SUCCESS:
+      debugger;
       return state
         .set('loading', false)
         .set('error', false)
