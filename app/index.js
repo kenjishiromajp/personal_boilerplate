@@ -6,16 +6,14 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
+import configureStore from './store';
 import App from './containers/App';
 
 const initialState = {};
 
-
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }
-import configureStore from './store';
-
 
 const history = createHistory();
 const store = configureStore(initialState, history);

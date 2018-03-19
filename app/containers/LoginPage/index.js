@@ -1,8 +1,8 @@
 /**
-*
-* LoginPage
-*
-*/
+ *
+ * LoginPage
+ *
+ */
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -19,8 +19,7 @@ import './styles.less';
 const FormItem = Form.Item;
 
 class LoginPage extends Component {
-  state = {
-  };
+  state = {};
   renderHead() {
     return (
       <Helmet>
@@ -36,27 +35,46 @@ class LoginPage extends Component {
         this.props.login(username, password);
       }
     });
-  }
+  };
   render() {
     const { renderHead } = this;
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="login-page">
-        { renderHead() }
+        {renderHead()}
         <h1>LoginPage</h1>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <FormItem>
             {getFieldDecorator('username', {
-              rules: [{ required: true, message: 'Please input your username!' }],
-            })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />)}
+              rules: [
+                { required: true, message: 'Please input your username!' },
+              ],
+            })(<Input
+              prefix={
+                <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+              }
+              placeholder="Username"
+            />)}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
-            })(<Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />)}
+              rules: [
+                { required: true, message: 'Please input your Password!' },
+              ],
+            })(<Input
+              prefix={
+                <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+              }
+              type="password"
+              placeholder="Password"
+            />)}
           </FormItem>
           <FormItem>
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
               Log in
             </Button>
           </FormItem>
@@ -66,18 +84,13 @@ class LoginPage extends Component {
   }
 }
 
-LoginPage.propTypes = {
-};
+LoginPage.propTypes = {};
 
-const mapStateToProps = createStructuredSelector({
-});
+const mapStateToProps = createStructuredSelector({});
 
 const mapDispatchToProps = (dispatch) => ({
   login: (username, password) => dispatch(login(username, password)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-export default compose(
-  Form.create(),
-  withConnect,
-)(LoginPage);
+export default compose(Form.create(), withConnect)(LoginPage);

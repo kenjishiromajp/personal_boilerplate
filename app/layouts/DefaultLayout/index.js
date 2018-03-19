@@ -16,20 +16,32 @@ const { Content } = Layout;
 class DefaultLayout extends React.Component {
   openSidebar = () => {
     this.props.toggleSidebar();
-  }
+  };
   render() {
     const { openSidebar } = this;
-    const { component: Component, location, sidebarOpened, ...rest } = this.props;
+    const {
+      component: Component,
+      location,
+      sidebarOpened,
+      ...rest
+    } = this.props;
     return (
       <Route
         {...rest}
         render={(matchProps) => (
           <div className="default-layout">
             <Layout>
-              <MySidebar currentPath={location.pathname} opened={sidebarOpened} />
+              <MySidebar
+                currentPath={location.pathname}
+                opened={sidebarOpened}
+              />
               <Layout>
                 <MyHeader>
-                  <Icon className="trigger" onClick={openSidebar} type={sidebarOpened ? 'menu-fold' : 'menu-unfold'} />
+                  <Icon
+                    className="trigger"
+                    onClick={openSidebar}
+                    type={sidebarOpened ? 'menu-fold' : 'menu-unfold'}
+                  />
                 </MyHeader>
                 <Content>
                   <Component {...matchProps} />
@@ -46,7 +58,10 @@ class DefaultLayout extends React.Component {
 DefaultLayout.propTypes = {
   location: PropTypes.object.isRequired,
   sidebarOpened: PropTypes.bool.isRequired,
-  component: PropTypes.oneOfType([PropTypes.instanceOf(React.Component), PropTypes.func]).isRequired,
+  component: PropTypes.oneOfType([
+    PropTypes.instanceOf(React.Component),
+    PropTypes.func,
+  ]).isRequired,
   toggleSidebar: PropTypes.func.isRequired,
 };
 
@@ -58,7 +73,6 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   toggleSidebar: () => dispatch(toggleSidebar()),
 });
-
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 export default compose(withConnect)(DefaultLayout);

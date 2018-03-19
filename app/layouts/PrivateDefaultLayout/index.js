@@ -13,15 +13,9 @@ class PrivateDefaultLayout extends React.Component {
     // return !!this.props.user.size;
   }
   render() {
-    if(!this.authenticated())
-      return <Redirect to="/login" />;
+    if (!this.authenticated()) return <Redirect to="/login" />;
     const { component: Component, ...rest } = this.props;
-    return (
-      <DefaultLayout
-        {...rest}
-        component={Component}
-      />
-    );
+    return <DefaultLayout {...rest} component={Component} />;
   }
 }
 

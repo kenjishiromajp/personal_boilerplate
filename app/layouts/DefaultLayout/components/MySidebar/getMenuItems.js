@@ -1,4 +1,4 @@
-const getMenuItems = () =>{
+const getMenuItems = () => {
   const MENU_ITEMS = [
     {
       to: '/',
@@ -17,5 +17,5 @@ const getMenuItems = () =>{
     },
   ];
   return MENU_ITEMS;
-}
+};
 export default getMenuItems;

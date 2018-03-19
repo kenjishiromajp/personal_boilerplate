@@ -7,24 +7,19 @@ const { Sider } = Layout;
 
 class MySidebar extends Component {
   renderMenuItems() {
-    return getMenuItems().map((menuItem) =>
-      (
-        <Menu.Item key={menuItem.to}>
-          <MyMenuItem {...menuItem} />
-        </Menu.Item>
-      ));
+    return getMenuItems().map((menuItem) => (
+      <Menu.Item key={menuItem.to}>
+        <MyMenuItem {...menuItem} />
+      </Menu.Item>
+    ));
   }
   render() {
     const { opened, currentPath } = this.props;
     return (
-      <Sider
-        trigger={null}
-        collapsible
-        collapsed={!opened}
-      >
+      <Sider trigger={null} collapsible collapsed={!opened}>
         <div className="logo" />
-        <Menu theme="dark" mode="inline" selectedKeys={[currentPath]} >
-          { this.renderMenuItems() }
+        <Menu theme="dark" mode="inline" selectedKeys={[currentPath]}>
+          {this.renderMenuItems()}
         </Menu>
       </Sider>
     );

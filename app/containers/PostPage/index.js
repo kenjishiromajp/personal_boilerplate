@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from 'antd';
+import { Card, Icon, notification } from 'antd';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -9,7 +9,11 @@ import reducer from './reducer';
 import saga from './saga';
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
-import { makeSelectPosts, makeSelectPostsLoading } from './selectors';
+import {
+  makeSelectError,
+  makeSelectPosts,
+  makeSelectPostsLoading,
+} from './selectors';
 import { loadPosts, removePost } from './actions';
 
 class PostPage extends Component {
@@ -18,9 +22,15 @@ class PostPage extends Component {
   }
   renderPosts = () => {
     const { posts } = this.props;
-    if (posts === null) { return <div>Empty State</div>; }
-    return posts.map((post) => <div onClick={()=>this.props.removePost(post.id)} key={post.id}>{post.title}</div>);
-  }
+    if (posts === null) {
+      return <div>Empty State</div>;
+    }
+    return posts.map((post) => (
+      <div onClick={() => this.props.removePost(post.id)} key={post.id}>
+        {post.title}
+      </div>
+    ));
+  };
   renderHead() {
     return (
       <Helmet>
@@ -28,22 +38,31 @@ class PostPage extends Component {
       </Helmet>
     );
   }
+  componentDidUpdate() {
+    if (!this.props.error) {
+      return;
+    }
+    notification.open({
+      message: 'Error',
+      description: this.props.error.toString(),
+      icon: <Icon type="frown-o" style={{ color: '#FF0000' }} />,
+    });
+  }
   render() {
     const { renderHead } = this;
     const { loading } = this.props;
     return (
       <div>
-        { renderHead() }
+        {renderHead()}
         <h1>Post Page!</h1>
-        <Card loading={loading} >
-          { this.renderPosts() }
-        </Card>
+        <Card loading={loading}>{this.renderPosts()}</Card>
       </div>
     );
   }
 }
 
 PostPage.propTypes = {
+  error: PropTypes.object,
   posts: PropTypes.array,
   loading: PropTypes.bool.isRequired,
   loadPosts: PropTypes.func.isRequired,
@@ -51,6 +70,7 @@ PostPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
+  error: makeSelectError(),
   posts: makeSelectPosts(),
   loading: makeSelectPostsLoading(),
 });
@@ -63,8 +83,4 @@ const mapDispatchToProps = (dispatch) => ({
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'posts', reducer });
 const withSaga = injectSaga({ key: 'posts', saga });
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(PostPage);
+export default compose(withReducer, withSaga, withConnect)(PostPage);

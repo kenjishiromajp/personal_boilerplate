@@ -5,14 +5,12 @@ const { Header } = Layout;
 import './style.less';
 
 const MyHeader = ({ children }) => (
-  <Header className="my-header" >
-    { children }
-  </Header>
+  <Header className="my-header">{children}</Header>
 );
 MyHeader.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
-}
+};
 export default MyHeader;

@@ -15,10 +15,10 @@ const prettyHost = customHost || 'localhost';
 
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
-  publicPath: '/'
+  publicPath: '/',
 });
 
-app.listen(port, host, err => {
+app.listen(port, host, (err) => {
   if (err) {
     return logger.error(err.message);
   }

@@ -54,7 +54,7 @@ export function post(
     ..._options,
     body: JSON.stringify(body),
   };
-  return request(url,'POST', options);
+  return request(url, 'POST', options);
 }
 
 export function patch(
@@ -68,7 +68,6 @@ export function patch(
   };
   return request(url, 'PATCH', options);
 }
-
 
 export function requestDelete(
   url,

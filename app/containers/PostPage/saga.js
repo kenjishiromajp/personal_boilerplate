@@ -1,7 +1,12 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import request, { requestDelete } from '../../utils/request';
 import { LOAD_POSTS, REMOVE_POST } from './constants';
-import { loadPostsError, postRemoved, postsLoaded, removePostError } from './actions';
+import {
+  loadPostsError,
+  postRemoved,
+  postsLoaded,
+  removePostError,
+} from './actions';
 import normalizePosts from './normalizr';
 
 export default function* postsData() {
@@ -20,7 +25,6 @@ export function* getAllPosts() {
     yield put(loadPostsError(error));
   }
 }
-
 
 export function* removePost({ id }) {
   try {

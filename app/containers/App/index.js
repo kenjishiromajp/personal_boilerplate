@@ -29,4 +29,4 @@ class App extends Component {
 }
 
 const withSaga = injectSaga({ key: 'global', saga });
-export default compose(withSaga, )(App);
+export default compose(withSaga)(App);

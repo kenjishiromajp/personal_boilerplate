@@ -9,8 +9,10 @@ export default function* getData() {
 
 export function* getLogin({ username, password }) {
   try {
-    post('http://localhost:3004/users');
-    const user = yield call(post, 'http://localhost:3004/login', { username, password } );
+    const user = yield call(post, 'http://localhost:3004/login', {
+      username,
+      password,
+    });
     yield put(loginSuccess(user));
   } catch (error) {
     yield put(loginError(error));
