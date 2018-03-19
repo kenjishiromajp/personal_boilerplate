@@ -5,10 +5,14 @@ import {
   OPEN_SIDEBAR,
   TOGGLE_SIDEBAR,
 } from '../../layouts/DefaultLayout/constants';
+
 const initialState = fromJS({
   loading: false,
   error: false,
-  currentUser: {},
+  currentUser: {
+    token: 'eweqwehjqwquge',
+    fumeiro: '',
+  },
   sidebarOpened: true,
 });
 
