@@ -31,9 +31,9 @@ class {{ properCase name }} extends Component {
   componentDidMount() {
     // this.props.load{{ properCase name }}s();
   }
-  // render{{ properCase name }}s = () => {
+  // render{{ dashCase properCase name }}s = () => {
   //   const { {{ camelCase name }}s } = this.props;
-  //   if ({{ camelCase name }}s === null) { return <div>Empty State</div>; }
+  //   if ({{ dashCase camelCase name }}s === null) { return <div>Empty State</div>; }
   //   return {{ camelCase name }}s.map(({{ camelCase name }}) => <div key={ {{ camelCase name }}.id } >{ {{ properCase name }}.title }</div>);
   // }
   renderHead() {
@@ -46,7 +46,11 @@ class {{ properCase name }} extends Component {
   render() {
     const { renderHead } = this;
     return (
-      <div>
+  {{#if isPage}}
+      <div className="{{ dashCase (pageCase name) }}">
+  {{else}}
+      <div className="{{ dashCase (properCase name) }}">
+  {{/if}}
         { renderHead() }
         <h1>{{ properCase name }}</h1>
         { /* this.render{{properCase name}}s() */ }

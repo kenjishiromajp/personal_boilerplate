@@ -1,6 +1,6 @@
 module.exports = function (plop) {
   plop.setHelper('pageCase', (text) => {
-    const finalText = text.slice(0,1).toUpperCase() + text.slice(1);
+    const finalText = text.slice(0, 1).toUpperCase() + text.slice(1);
     return `${finalText}Page`;
   });
   // create your generators here
@@ -10,13 +10,41 @@ module.exports = function (plop) {
       type: 'input',
       name: 'name',
       message: 'What is the name of component?',
+    },
+    {
+      type: 'list',
+      name: 'typeComponent',
+      message: 'Which type of Component?',
+      choices: () => ['Stateless', 'React.Component'],
     }], // array of inquirer prompts
-    actions: [{
-      type: 'add',
-      path: '../app/components/{{properCase name}}/index.js',
-      templateFile: './component/index.js.hbs',
-      abortOnFail: true,
-    }],
+    actions: (data) => {
+      const { typeComponent } = data;
+      const actions = [{
+        type: 'add',
+        path: '../app/components/{{properCase name}}/style.less',
+        templateFile: './component/style.less.hbs',
+        abortOnFail: true,
+      }];
+
+      let templateFile = '';
+      switch (typeComponent) {
+        case 'Stateless':
+          templateFile = './component/stateless.js.hbs';
+          break;
+        default:
+          templateFile = './component/index.js.hbs';
+          break;
+      }
+
+      actions.push({
+        type: 'add',
+        path: '../app/components/{{properCase name}}/index.js',
+        templateFile,
+        abortOnFail: true,
+      });
+
+      return actions;
+    },
   });
   plop.setGenerator('container', {
     description: 'Create a simple Container',
