@@ -5,7 +5,13 @@ import {
   REMOVE_POST,
   REMOVE_POST_ERROR,
   REMOVE_POST_SUCCESS,
+  CREATE_POST,
+  CREATE_POST_ERROR,
+  CREATE_POST_SUCCESS,
+
 } from './constants';
+
+// POST LOAD
 
 export function loadPosts() {
   return {
@@ -27,6 +33,10 @@ export function loadPostsError(error) {
   };
 }
 
+// END POST LOAD
+
+
+// REMOVE POST
 export function removePost(id) {
   return {
     type: REMOVE_POST,
@@ -47,3 +57,29 @@ export function postRemoved(id) {
     id,
   };
 }
+
+// END REMOVE POST
+
+
+// CREATE POST
+export function createPost(post) {
+  return {
+    type: CREATE_POST,
+    post,
+  };
+}
+
+export function createPostError(error) {
+  return {
+    type: CREATE_POST_ERROR,
+    error,
+  };
+}
+
+export function postCreated(post) {
+  return {
+    type: CREATE_POST_SUCCESS,
+    post,
+  };
+}
+// END CREATE POST

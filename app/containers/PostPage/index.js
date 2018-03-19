@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon, notification } from 'antd';
+import { Card, Icon, Row, notification, Button } from 'antd';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -15,6 +15,7 @@ import {
   makeSelectPostsLoading,
 } from './selectors';
 import { loadPosts, removePost } from './actions';
+import PostCreateButton from './components/PostCreateButton/index';
 
 class PostPage extends Component {
   componentDidMount() {
@@ -22,7 +23,7 @@ class PostPage extends Component {
   }
   renderPosts = () => {
     const { posts } = this.props;
-    if (posts === null) {
+    if (!posts.length) {
       return <div>Empty State</div>;
     }
     return posts.map((post) => (
@@ -54,7 +55,10 @@ class PostPage extends Component {
     return (
       <div>
         {renderHead()}
-        <h1>Post Page!</h1>
+        <Row type="flex" justify="space-between" align="middle">
+          <h1>Post Page</h1>
+          <PostCreateButton />
+        </Row>
         <Card loading={loading}>{this.renderPosts()}</Card>
       </div>
     );
@@ -63,7 +67,7 @@ class PostPage extends Component {
 
 PostPage.propTypes = {
   error: PropTypes.object,
-  posts: PropTypes.array,
+  posts: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   loadPosts: PropTypes.func.isRequired,
   removePost: PropTypes.func.isRequired,
