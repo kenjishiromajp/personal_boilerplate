@@ -1,8 +1,8 @@
 /**
-*
-* PostForm
-*
-*/
+ *
+ * PostForm
+ *
+ */
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -24,7 +24,9 @@ class PostForm extends Component {
           </FormItem>
           <FormItem>
             {getFieldDecorator('description', {
-              rules: [{ required: true, message: 'Please insert a Description!' }],
+              rules: [
+                { required: true, message: 'Please insert a Description!' },
+              ],
             })(<Input.TextArea placeholder="Description" />)}
           </FormItem>
         </Form>

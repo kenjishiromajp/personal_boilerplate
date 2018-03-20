@@ -5,7 +5,10 @@ import {
   LOAD_POSTS_ERROR,
   REMOVE_POST,
   REMOVE_POST_SUCCESS,
-  REMOVE_POST_ERROR, CREATE_POST, CREATE_POST_SUCCESS, CREATE_POST_ERROR,
+  REMOVE_POST_ERROR,
+  CREATE_POST,
+  CREATE_POST_SUCCESS,
+  CREATE_POST_ERROR,
 } from './constants';
 
 const initialState = fromJS({
@@ -25,13 +28,17 @@ function postReducer(state = initialState, action) {
     case REMOVE_POST:
       return state.set('loading', true).set('error', null);
     case REMOVE_POST_SUCCESS:
-      return state.set('loading', false).deleteIn(['posts', action.id.toString()]);
+      return state
+        .set('loading', false)
+        .deleteIn(['posts', action.id.toString()]);
     case REMOVE_POST_ERROR:
       return state.set('loading', false).set('error', action.error);
     case CREATE_POST:
       return state.set('loading', true).set('error', null);
     case CREATE_POST_SUCCESS:
-      return state.set('loading', false).mergeDeep({ posts: { [action.post.id.toString()]: action.post } });
+      return state
+        .set('loading', false)
+        .mergeDeep({ posts: { [action.post.id.toString()]: action.post } });
     case CREATE_POST_ERROR:
       return state.set('loading', false).set('error', action.error);
     default:

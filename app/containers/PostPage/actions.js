@@ -8,7 +8,6 @@ import {
   CREATE_POST,
   CREATE_POST_ERROR,
   CREATE_POST_SUCCESS,
-
 } from './constants';
 
 // POST LOAD
@@ -35,7 +34,6 @@ export function loadPostsError(error) {
 
 // END POST LOAD
 
-
 // REMOVE POST
 export function removePost(id) {
   return {
@@ -60,12 +58,13 @@ export function postRemoved(id) {
 
 // END REMOVE POST
 
-
 // CREATE POST
-export function createPost(post) {
+export function createPost(post, resolve, reject) {
   return {
     type: CREATE_POST,
     post,
+    resolve,
+    reject,
   };
 }
 
