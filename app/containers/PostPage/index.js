@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon, Row, notification, Button } from 'antd';
+import { Card, Icon, Row, notification, Button, Table, Modal } from 'antd';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -16,28 +16,11 @@ import {
 } from './selectors';
 import { loadPosts, removePost } from './actions';
 import PostCreateButton from './components/PostCreateButton/index';
+const confirm = Modal.confirm;
 
 class PostPage extends Component {
   componentDidMount() {
     this.props.loadPosts();
-  }
-  renderPosts = () => {
-    const { posts } = this.props;
-    if (!posts.length) {
-      return <div>Empty State</div>;
-    }
-    return posts.map((post) => (
-      <div onClick={() => this.props.removePost(post.id)} key={post.id}>
-        {post.title}
-      </div>
-    ));
-  };
-  renderHead() {
-    return (
-      <Helmet>
-        <title>Post Page</title>
-      </Helmet>
-    );
   }
   componentDidUpdate() {
     if (!this.props.error) {
@@ -49,6 +32,76 @@ class PostPage extends Component {
       icon: <Icon type="frown-o" style={{ color: '#FF0000' }} />,
     });
   }
+  removePost = (post) => {
+    confirm({
+      okText: 'Yes',
+      okType: 'danger',
+      title: (
+        <span>
+          Do you want to delete -{' '}
+          <strong>
+            #{post.id} {post.title}{' '}
+          </strong>
+        </span>
+      ),
+      onOk: () => {
+        this.props.removePost(post.id);
+      },
+    });
+  };
+  renderHead() {
+    return (
+      <Helmet>
+        <title>Post Page</title>
+      </Helmet>
+    );
+  }
+  renderPosts = () => {
+    const { posts } = this.props;
+    if (!posts.length) {
+      return <div>Empty State</div>;
+    }
+    const columns = [
+      {
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id',
+      },
+      {
+        title: 'Title',
+        dataIndex: 'title',
+        key: 'title',
+      },
+      {
+        title: 'Description',
+        dataIndex: 'description',
+        key: 'description',
+      },
+      {
+        title: 'Actions',
+        key: 'actions',
+        render: (text, post) => (
+          <span>
+            <Button type="info">Editar</Button>
+            <Button type="danger" onClick={() => this.removePost(post)}>
+              Delete
+            </Button>
+          </span>
+        ),
+      },
+    ];
+    return (
+      <Table
+        size="middle"
+        dataSource={posts.map((post) => ({
+          ...post,
+          key: post.id,
+          rowKey: post.id,
+        }))}
+        columns={columns}
+      />
+    );
+  };
   render() {
     const { renderHead } = this;
     const { loading } = this.props;

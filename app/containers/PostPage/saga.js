@@ -16,7 +16,7 @@ import normalizePosts from './normalizr';
 import { fromJS } from '../../../node_modules/immutable/dist/immutable';
 
 export default function* postsData() {
-  return yield all([
+  yield all([
     takeLatest(LOAD_POSTS, getAllPosts),
     takeLatest(CREATE_POST, createPost),
     takeLatest(REMOVE_POST, removePost),
@@ -26,19 +26,20 @@ export default function* postsData() {
 export function* getAllPosts() {
   try {
     let posts = yield call(request, 'http://localhost:3004/posts');
-    posts = fromJS(normalizePosts(posts).entities.posts);
-    return yield put(postsLoaded(posts));
+    posts = posts.length ? normalizePosts(posts).entities.posts : {};
+    posts = fromJS(posts);
+    yield put(postsLoaded(posts));
   } catch (error) {
-    return yield put(loadPostsError(error));
+    yield put(loadPostsError(error));
   }
 }
 
 export function* removePost({ id }) {
   try {
     yield call(requestDelete, `http://localhost:3004/posts/${id}`);
-    return yield put(postRemoved(id));
+    yield put(postRemoved(id));
   } catch (error) {
-    return yield put(removePostError(id, error));
+    yield put(removePostError(id, error));
   }
 }
 

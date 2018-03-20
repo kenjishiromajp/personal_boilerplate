@@ -23,26 +23,23 @@ class PostCreateButton extends Component {
       modalVisible: !this.state.modalVisible,
     });
   };
-  submit = () => {
-    const fields = this.props.form.getFieldsValue();
+  submit = (postData) => {
+    if (this.state.loading) {
+      return;
+    }
     this.setState({
       loading: true,
     });
-    this.props.createPost(fields).then(() => {
+    this.props.createPost(postData).then(() => {
       this.setState({
         loading: false,
         modalVisible: false,
       });
-      this.resetValues();
+      this.postform.resetFields();
     });
   };
-  resetValues() {
-    this.props.form.setFieldsValue({
-      title: '',
-      description: '',
-    });
-  }
   render() {
+    const { loading } = this.state;
     return (
       <div className="post-create-button">
         <Button type="primary" onClick={() => this.toggleModal()}>
@@ -51,18 +48,22 @@ class PostCreateButton extends Component {
         <Modal
           wrapClassName="vertical-center-modal"
           visible={this.state.modalVisible}
-          onOk={() => this.submit()}
+          footer={null}
           onCancel={() => this.toggleModal()}
         >
           <h2>Create Post</h2>
-          <PostForm form={this.props.form} />
+          <PostForm
+            ref={(postform) => (this.postform = postform)}
+            loading={loading}
+            onCancel={() => this.toggleModal()}
+            onCreate={(postData) => this.submit(postData)}
+          />
         </Modal>
       </div>
     );
   }
 }
 PostCreateButton.propTypes = {
-  form: PropTypes.object.isRequired,
   createPost: PropTypes.func.isRequired,
 };
 
@@ -74,4 +75,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(Form.create(), withConnect)(PostCreateButton);
+export default compose(withConnect)(PostCreateButton);
