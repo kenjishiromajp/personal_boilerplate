@@ -2,6 +2,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { post } from '../../utils/request';
 import { LOGIN } from './constants';
 import { loginError, loginSuccess } from './actions';
+import { API_URL } from '../../utils/constants';
 
 export default function* getData() {
   yield takeLatest(LOGIN, getLogin);
@@ -9,7 +10,7 @@ export default function* getData() {
 
 export function* getLogin({ username, password }) {
   try {
-    const user = yield call(post, 'http://localhost:3004/login', {
+    const user = yield call(post, `${API_URL}/login`, {
       username,
       password,
     });

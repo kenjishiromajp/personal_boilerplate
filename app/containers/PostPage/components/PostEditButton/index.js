@@ -1,6 +1,6 @@
 /**
  *
- * PostCreateButton
+ * PostEditButton
  *
  */
 
@@ -11,9 +11,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PostForm from '../PostForm';
 import './style.less';
-import { createPost } from '../../actions';
+import { editPost } from '../../actions';
 
-class PostCreateButton extends Component {
+class PostEditButton extends Component {
   state = {
     loading: false,
     modalVisible: false,
@@ -30,49 +30,45 @@ class PostCreateButton extends Component {
     this.setState({
       loading: true,
     });
-    this.props.createPost(postData).then(() => {
-      this.setState({
-        loading: false,
-        modalVisible: false,
-      });
-      this.postform.resetFields();
-    });
+    this.props.editPost(postData);
   };
   render() {
     const { loading } = this.state;
+    const { post } = this.props;
     return (
-      <div className="post-create-button">
-        <Button type="primary" onClick={() => this.toggleModal()}>
-          Create Post
-        </Button>
+      <span className="post-edit-button">
+        <Button onClick={() => this.toggleModal()}>Edit Post</Button>
         <Modal
           wrapClassName="vertical-center-modal"
           visible={this.state.modalVisible}
           footer={null}
           onCancel={() => this.toggleModal()}
         >
-          <h2>Create Post</h2>
+          <h2>
+            Edit Post <strong>#{post.id}</strong>
+          </h2>
           <PostForm
+            post={post}
             ref={(postform) => (this.postform = postform)}
             loading={loading}
             onCancel={() => this.toggleModal()}
             onSubmit={(postData) => this.submit(postData)}
           />
         </Modal>
-      </div>
+      </span>
     );
   }
 }
-PostCreateButton.propTypes = {
-  createPost: PropTypes.func.isRequired,
+PostEditButton.propTypes = {
+  editPost: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch) => ({
-  createPost: (post) =>
-    new Promise((resolve, reject) =>
-      dispatch(createPost(post, resolve, reject))),
+  editPost: (post) =>
+    new Promise((resolve, reject) => dispatch(editPost(post, resolve, reject))),
 });
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(withConnect)(PostCreateButton);
+export default compose(withConnect)(PostEditButton);

@@ -15,8 +15,9 @@ import {
   makeSelectPostsLoading,
 } from './selectors';
 import { loadPosts, removePost } from './actions';
-import PostCreateButton from './components/PostCreateButton/index';
-const confirm = Modal.confirm;
+import PostCreateButton from './components/PostCreateButton';
+import PostEditButton from './components/PostEditButton';
+const { confirm } = Modal;
 
 class PostPage extends Component {
   componentDidMount() {
@@ -82,7 +83,7 @@ class PostPage extends Component {
         key: 'actions',
         render: (text, post) => (
           <span>
-            <Button type="info">Editar</Button>
+            <PostEditButton post={post} />
             <Button type="danger" onClick={() => this.removePost(post)}>
               Delete
             </Button>
