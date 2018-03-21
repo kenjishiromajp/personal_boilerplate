@@ -1,8 +1,8 @@
 /**
-*
-* CommentCreateButton
-*
-*/
+ *
+ * CommentCreateButton
+ *
+ */
 
 import React, { Component } from 'react';
 import { Button, Form, Modal } from 'antd';

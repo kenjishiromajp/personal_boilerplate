@@ -32,7 +32,7 @@ const CommentList = ({ comments, actionColumn }) => {
     <div className="comment-list">
       <Table
         size="middle"
-        dataSource={ comments.map((comment) => ({
+        dataSource={comments.map((comment) => ({
           ...comment,
           key: comment.id,
           rowKey: comment.id,

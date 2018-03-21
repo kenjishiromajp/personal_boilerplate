@@ -10,6 +10,7 @@ import { Button, Form, Input, Row } from 'antd';
 import { compose } from 'redux';
 
 const FormItem = Form.Item;
+const { TextArea } = Input;
 
 class PostForm extends Component {
   componentDidMount() {
@@ -67,7 +68,7 @@ class PostForm extends Component {
               rules: [
                 { required: true, message: 'Please insert a Description!' },
               ],
-            })(<Input.TextArea placeholder="Description" />)}
+            })(<TextArea placeholder="Description" />)}
           </FormItem>
           <Row type="flex" justify="end">
             <Button onClick={() => this.handleCancel()}>Cancel</Button>

@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import MyMenuItem from '../MyMenuItem/index';
 import getMenuItems from './getMenuItems';
 const { Sider } = Layout;
+const MenuItem = Menu.Item;
 
 class MySidebar extends Component {
   renderMenuItems() {
     return getMenuItems().map((menuItem) => (
-      <Menu.Item key={menuItem.to}>
+      <MenuItem key={menuItem.to}>
         <MyMenuItem {...menuItem} />
-      </Menu.Item>
+      </MenuItem>
     ));
   }
   render() {

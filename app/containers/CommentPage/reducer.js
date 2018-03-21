@@ -41,7 +41,9 @@ function commentReducer(state = initialState, action) {
     case CREATE_COMMENT_SUCCESS:
       return state
         .set('loading', false)
-        .mergeDeep({ comments: { [action.comment.id.toString()]: action.comment } });
+        .mergeDeep({
+          comments: { [action.comment.id.toString()]: action.comment },
+        });
     case CREATE_COMMENT_ERROR:
       return state.set('loading', false).set('error', action.error);
     case EDIT_COMMENT:
@@ -49,7 +51,9 @@ function commentReducer(state = initialState, action) {
     case EDIT_COMMENT_SUCCESS:
       return state
         .set('loading', false)
-        .mergeDeep({ comments: { [action.comment.id.toString()]: action.comment } });
+        .mergeDeep({
+          comments: { [action.comment.id.toString()]: action.comment },
+        });
     case EDIT_COMMENT_ERROR:
       return state.set('loading', false).set('error', action.error);
     default:

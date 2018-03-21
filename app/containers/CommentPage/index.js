@@ -1,8 +1,8 @@
 /**
-*
-* Comment Page
-*
-*/
+ *
+ * Comment Page
+ *
+ */
 import React, { Component } from 'react';
 import { Card, Icon, Row, notification, Button, Table, Modal } from 'antd';
 import { compose } from 'redux';
@@ -51,7 +51,7 @@ class CommentPage extends Component {
         <span>
           Do you want to delete -{' '}
           <strong>
-            #{ comment.id} { comment.title}
+            #{comment.id} {comment.title}
           </strong>
         </span>
       ),
@@ -62,7 +62,7 @@ class CommentPage extends Component {
   };
   actionColumn = (text, comment) => (
     <span>
-      <CommentEditButton comment={ comment } />
+      <CommentEditButton comment={comment} />
       <Button type="danger" onClick={() => this.removeComment(comment)}>
         Delete
       </Button>
@@ -86,7 +86,7 @@ class CommentPage extends Component {
           <CommentCreateButton />
         </Row>
         <Card loading={loading}>
-          <CommentList comments={ comments} actionColumn={this.actionColumn} />
+          <CommentList comments={comments} actionColumn={this.actionColumn} />
         </Card>
       </div>
     );

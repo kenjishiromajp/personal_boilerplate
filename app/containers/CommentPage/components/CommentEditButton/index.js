@@ -44,10 +44,10 @@ class CommentEditButton extends Component {
           onCancel={() => this.toggleModal()}
         >
           <h2>
-            Edit Comment <strong>#{ comment.id}</strong>
+            Edit Comment <strong>#{comment.id}</strong>
           </h2>
           <CommentForm
-            comment={ comment }
+            comment={comment}
             ref={(commentform) => (this.commentform = commentform)}
             loading={loading}
             onCancel={() => this.toggleModal()}
@@ -66,7 +66,8 @@ CommentEditButton.propTypes = {
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch) => ({
   editComment: (comment) =>
-    new Promise((resolve, reject) => dispatch(editComment(comment, resolve, reject))),
+    new Promise((resolve, reject) =>
+      dispatch(editComment(comment, resolve, reject))),
 });
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 

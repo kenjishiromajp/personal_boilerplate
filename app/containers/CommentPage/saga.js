@@ -4,7 +4,12 @@ import request, {
   putRequest,
   postRequest,
 } from '../../utils/request';
-import { CREATE_COMMENT, EDIT_COMMENT, LOAD_COMMENTS, REMOVE_COMMENT } from './constants';
+import {
+  CREATE_COMMENT,
+  EDIT_COMMENT,
+  LOAD_COMMENTS,
+  REMOVE_COMMENT,
+} from './constants';
 import {
   createCommentError,
   editCommentError,
@@ -31,7 +36,9 @@ export default function* commentsData() {
 export function* getAllComments() {
   try {
     let comments = yield call(request, `${API_URL}/comments`);
-    comments = comments.length ? normalizeComments(comments).entities.comments : {};
+    comments = comments.length
+      ? normalizeComments(comments).entities.comments
+      : {};
     comments = fromJS(comments);
     yield put(commentsLoaded(comments));
   } catch (error) {
@@ -41,7 +48,11 @@ export function* getAllComments() {
 
 export function* createComment({ resolve, reject, ...action }) {
   try {
-    const comment = yield call(postRequest, `${API_URL}/comments`, action.comment);
+    const comment = yield call(
+      postRequest,
+      `${API_URL}/comments`,
+      action.comment
+    );
     yield put(commentCreated(comment));
     resolve(comment);
   } catch (error) {
