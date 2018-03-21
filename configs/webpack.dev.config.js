@@ -35,7 +35,7 @@ module.exports = require('./_webpack.base.config.js')({
     chunkFilename: '[name].chunk.js',
   },
   plugins,
-  devtools: 'eval-source-map',
+  devtool: 'eval-source-map',
   performance: {
     hints: false,
   },
