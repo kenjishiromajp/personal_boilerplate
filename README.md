@@ -2,7 +2,7 @@
 
 > Boilerplate of AntDesign & Redux-Saga & React & Redux & PLOP
 
-<a href="#"><img width="728" src="https://raw.githubusercontent.com/kenjishiromajp/personal_boilerplate/master/imgs/background_image.jpg" alt="Personal Boilerplate - AntDesign & Redux-Saga & React & Redux & PLOP" /></a>
+<a href="#"><img width="728" src="https://raw.githubusercontent.com/kenjishiromajp/personal_boilerplate/master/imgs/background_image.png" alt="Personal Boilerplate - AntDesign & Redux-Saga & React & Redux & PLOP" /></a>
 
 ### File structure
 ```
