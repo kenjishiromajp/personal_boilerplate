@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PostForm from '../PostForm';
-import './style.less';
 import { editPost } from '../../actions';
 
 class PostEditButton extends Component {

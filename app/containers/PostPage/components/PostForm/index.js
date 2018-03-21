@@ -8,16 +8,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, Input, Row } from 'antd';
 import { compose } from 'redux';
-import './style.less';
 
 const FormItem = Form.Item;
 
 class PostForm extends Component {
   componentDidMount() {
-    // if (this.props.post) {
-    //   this.props.form.setFieldsValue(this.props.post);
-    // }
-    // this.props.form.validateFields();
+    this.props.form.validateFields();
   }
   getError(prop) {
     const { isFieldTouched, getFieldError } = this.props.form;
