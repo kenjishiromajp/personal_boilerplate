@@ -1,6 +1,6 @@
 /**
  *
- * PostForm
+ * {{ properCase name }}Form
  *
  */
 
@@ -11,7 +11,7 @@ import { compose } from 'redux';
 
 const FormItem = Form.Item;
 
-class PostForm extends Component {
+class {{ properCase name }}Form extends Component {
   componentDidMount() {
     this.props.form.validateFields();
   }
@@ -30,10 +30,10 @@ class PostForm extends Component {
     if (this.hasErrors()) {
       return;
     }
-    const postData = this.props.post
-      ? { ...this.props.form.getFieldsValue(), id: this.props.post.id }
+    const {{ camelCase name }}Data = this.props.{{ camelCase name }}
+      ? { ...this.props.form.getFieldsValue(), id: this.props.{{ camelCase name }}.id }
       : this.props.form.getFieldsValue();
-    this.props.onSubmit(postData);
+    this.props.onSubmit({{ camelCase name }}Data);
     return false;
   };
   render() {
@@ -43,32 +43,14 @@ class PostForm extends Component {
     const titleError = this.getError('title');
     const descriptionError = this.getError('description');
     return (
-      <div className="post-form">
+      <div className="{{ camelCase name }}-form">
         <Form
           onSubmit={(ev) => {
             ev.preventDefault();
             this.handleSubmit();
           }}
-          className="post-form"
+          className="{{ dashCase name }}-form"
         >
-          <FormItem
-            validateStatus={titleError ? 'error' : ''}
-            help={titleError || ''}
-          >
-            {getFieldDecorator('title', {
-              rules: [{ required: true, message: 'Please insert a title!' }],
-            })(<Input placeholder="Title" />)}
-          </FormItem>
-          <FormItem
-            validateStatus={descriptionError ? 'error' : ''}
-            help={descriptionError || ''}
-          >
-            {getFieldDecorator('description', {
-              rules: [
-                { required: true, message: 'Please insert a Description!' },
-              ],
-            })(<Input.TextArea placeholder="Description" />)}
-          </FormItem>
           <Row type="flex" justify="end">
             <Button onClick={() => this.handleCancel()}>Cancel</Button>
             <Button
@@ -77,7 +59,7 @@ class PostForm extends Component {
               onClick={() => this.handleSubmit()}
               type="primary"
             >
-              {this.props.post ? 'Edit' : 'Create'}
+              {this.props.{{ camelCase name }} ? 'Edit' : 'Create'}
             </Button>
           </Row>
         </Form>
@@ -86,22 +68,22 @@ class PostForm extends Component {
   }
 }
 
-PostForm.propTypes = {
+{{ properCase name }}Form.propTypes = {
   form: PropTypes.object.isRequired,
-  post: PropTypes.object,
+  {{ camelCase name }}: PropTypes.object,
   onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 
 const withFormCreate = Form.create({
-  mapPropsToFields({ post }) {
-    return post
+  mapPropsToFields({ {{ camelCase name }} }) {
+    return {{ camelCase name }}
       ? {
-        title: Form.createFormField({ value: post.title }),
-        description: Form.createFormField({ value: post.description }),
+        title: Form.createFormField({ value: {{ camelCase name }}.title }),
+        description: Form.createFormField({ value: {{ camelCase name }}.description }),
       }
       : {};
   },
 });
-export default compose(withFormCreate)(PostForm);
+export default compose(withFormCreate)({{ properCase name }}Form);

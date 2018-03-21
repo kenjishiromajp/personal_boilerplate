@@ -4,7 +4,7 @@ module.exports = function (plop) {
     return `${finalText}Page`;
   });
   // create your generators here
-  plop.setGenerator('component', {
+  plop.setGenerator('Component', {
     description: 'Create a simple Component',
     prompts: [{
       type: 'input',
@@ -46,79 +46,136 @@ module.exports = function (plop) {
       return actions;
     },
   });
-  plop.setGenerator('container', {
-    description: 'Create a simple Container',
+  plop.setGenerator('Page Container', {
+    description: 'Create a simple Page Container',
     prompts: [
       {
         type: 'input',
         name: 'name',
-        message: 'What is the name of container?',
+        message: 'What is the name of your page?',
       },
       {
         type: 'confirm',
-        name: 'isPage',
-        message: 'is It a page?',
+        name: 'isPrivate',
+        message: 'is It a Private Page?',
       },
       {
-        type: 'confirm',
-        name: 'wantCRUD',
-        message: 'Do you want to create CRUD?',
+        type: 'list',
+        name: 'typeEnhancement',
+        message: 'Select the enhancement that you want',
+        choices: () => ['With CRUD of some entity', 'Connected with another reducer', 'Empty'],
       },
     ], // array of inquirer prompts
     actions: (data) => {
-      const { isPage } = data;
-      const filter = !isPage ? 'properCase' : 'pageCase';
-      const actions = [
-        {
-          type: 'add',
-          path: `../app/containers/{{${filter} name}}/index.js`,
-          templateFile: './container/index.js.hbs',
-          abortOnFail: true,
-        },
-        {
-          type: 'add',
-          path: `../app/containers/{{${filter} name}}/actions.js`,
-          templateFile: './container/actions.js.hbs',
-          abortOnFail: true,
-        },
-        {
-          type: 'add',
-          path: `../app/containers/{{${filter} name}}/constants.js`,
-          templateFile: './container/constants.js.hbs',
-          abortOnFail: true,
-        },
-        {
-          type: 'add',
-          path: `../app/containers/{{${filter} name}}/normalizr.js`,
-          templateFile: './container/normalizr.js.hbs',
-          abortOnFail: true,
-        },
-        {
-          type: 'add',
-          path: `../app/containers/{{${filter} name}}/reducer.js`,
-          templateFile: './container/reducer.js.hbs',
-          abortOnFail: true,
-        },
-        {
-          type: 'add',
-          path: `../app/containers/{{${filter} name}}/saga.js`,
-          templateFile: './container/saga.js.hbs',
-          abortOnFail: true,
-        },
-        {
-          type: 'add',
-          path: `../app/containers/{{${filter} name}}/selectors.js`,
-          templateFile: './container/selectors.js.hbs',
-          abortOnFail: true,
-        },
-      ];
-      if (isPage) {
-        actions.push({
-          type: 'add',
-          path: '../app/containers/{{pageCase name}}/loadable.js',
-          templateFile: './container/loadable.js.hbs',
-          abortOnFail: true,
-        });
+      const { typeEnhancement } = data;
+      let actions = [{
+        type: 'add',
+        path: '../app/containers/{{pageCase name}}/loadable.js',
+        templateFile: './container/loadable.js.hbs',
+        abortOnFail: true,
+      }];
+      switch (typeEnhancement) {
+        case 'Connected with another reducer':
+          actions = [
+            ...actions,
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/index.js',
+              templateFile: './container/withListOnly/index.js.hbs',
+              abortOnFail: true,
+            },
+          ];
+          break;
+        case 'With CRUD of some entity':
+          actions = [
+            ...actions,
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/index.js',
+              templateFile: './container/crud/index.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/components/{{properCase name}}CreateButton/index.js',
+              templateFile: './container/components/EntityCreateButton/index.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/components/{{properCase name}}EditButton/index.js',
+              templateFile: './container/components/EntityEditButton/index.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/components/{{properCase name}}Form/index.js',
+              templateFile: './container/components/EntityForm/index.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/components/{{properCase name}}List/index.js',
+              templateFile: './container/components/EntityList/index.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/actions.js',
+              templateFile: './container/crud/actions.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/constants.js',
+              templateFile: './container/crud/constants.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/normalizr.js',
+              templateFile: './container/crud/normalizr.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/reducer.js',
+              templateFile: './container/crud/reducer.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/saga.js',
+              templateFile: './container/crud/saga.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/selectors.js',
+              templateFile: './container/crud/selectors.js.hbs',
+              abortOnFail: true,
+            },
+          ];
+          break;
+        case 'Empty':
+          actions = [
+            ...actions,
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/index.js',
+              templateFile: './container/empty/index.js.hbs',
+              abortOnFail: true,
+            },
+            {
+              type: 'add',
+              path: '../app/containers/{{properCase name}}Page/style.less',
+              templateFile: './container/empty/style.less.hbs',
+              abortOnFail: true,
+            },
+          ];
+          break;
+        default:
+          break;
       }
       return actions;
     },

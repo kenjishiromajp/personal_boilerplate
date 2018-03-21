@@ -1,0 +1,15 @@
+export const LOAD_COMMENTS = 'CommentPage/LOAD_COMMENTS';
+export const LOAD_COMMENTS_SUCCESS = 'CommentPage/LOAD_COMMENTS_SUCCESS';
+export const LOAD_COMMENTS_ERROR = 'CommentPage/LOAD_COMMENTS_ERROR';
+
+export const REMOVE_COMMENT = 'CommentPage/REMOVE_COMMENT';
+export const REMOVE_COMMENT_SUCCESS = 'CommentPage/REMOVE_COMMENT_SUCCESS';
+export const REMOVE_COMMENT_ERROR = 'CommentPage/REMOVE_COMMENT_ERROR';
+
+export const CREATE_COMMENT = 'CommentPage/CREATE_COMMENT';
+export const CREATE_COMMENT_ERROR = 'CommentPage/CREATE_COMMENT_ERROR';
+export const CREATE_COMMENT_SUCCESS = 'CommentPage/CREATE_COMMENT_SUCCESS';
+
+export const EDIT_COMMENT = 'CommentPage/EDIT_COMMENT';
+export const EDIT_COMMENT_ERROR = 'CommentPage/EDIT_COMMENT_ERROR';
+export const EDIT_COMMENT_SUCCESS = 'CommentPage/EDIT_COMMENT_SUCCESS';

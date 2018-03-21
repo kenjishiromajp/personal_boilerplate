@@ -1,0 +1,48 @@
+/**
+*
+* {{ titleCase name }} Page
+*
+*/
+import React, { Component } from 'react';
+import { Card, Row } from 'antd';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
+
+class {{ properCase name }}Page extends Component {
+  renderHead() {
+    return (
+      <Helmet>
+        <title>{{ properCase name }} Page</title>
+      </Helmet>
+    );
+  }
+  render() {
+    const { renderHead } = this;
+    return (
+      <div className="{{ dashCase name }}-page">
+        {renderHead()}
+        <Row type="flex" justify="space-between" align="middle">
+          <h1>{{ properCase name }} Page</h1>
+        </Row>
+        <Card>
+          //TODO: Put a list here
+        </Card>
+      </div>
+    );
+  }
+}
+
+{{ properCase name }}Page.propTypes = {
+};
+
+const mapStateToProps = createStructuredSelector({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+export default compose(withConnect)({{ properCase name }}Page);
