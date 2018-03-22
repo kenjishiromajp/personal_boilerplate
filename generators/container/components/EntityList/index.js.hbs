@@ -15,6 +15,13 @@ const getColumns = (actionColumn) => {
       dataIndex: 'id',
       key: 'id',
     },
+{{#each (transformInArray properties)}}
+    {
+      title: '{{ titleCase this }}',
+      dataIndex: '{{ camelCase this }}',
+      key: '{{ camelCase this }}',
+    },
+{{/each}}
   ];
   if (actionColumn) {
     columns.push({

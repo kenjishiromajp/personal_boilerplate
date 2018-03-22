@@ -3,6 +3,7 @@ module.exports = function (plop) {
     const finalText = text.slice(0, 1).toUpperCase() + text.slice(1);
     return `${finalText}Page`;
   });
+  plop.setHelper('transformInArray', (text) => text.split(',').map((str) => str.trim()));
   // create your generators here
   plop.setGenerator('Component', {
     description: 'Create a simple Component',
@@ -46,6 +47,31 @@ module.exports = function (plop) {
       return actions;
     },
   });
+  plop.setGenerator('Form', {
+    description: 'Create a simple Form',
+    prompts: [{
+      type: 'input',
+      name: 'name',
+      message: 'What is the name of Entity?',
+    },
+    {
+      type: 'input',
+      name: 'properties',
+      message: 'Type properties separated by comma (,)',
+    }],
+    actions: [{
+      type: 'add',
+      path: '../app/components/{{properCase name}}Form/style.less',
+      templateFile: './component/style.less.hbs',
+      abortOnFail: true,
+    },
+    {
+      type: 'add',
+      path: '../app/components/{{properCase name}}Form/index.js',
+      templateFile: './form/index.js.hbs',
+      abortOnFail: true,
+    }],
+  });
   plop.setGenerator('Page Container', {
     description: 'Create a simple Page Container',
     prompts: [
@@ -64,6 +90,11 @@ module.exports = function (plop) {
         name: 'typeEnhancement',
         message: 'Select the enhancement that you want',
         choices: () => ['With CRUD of some entity', 'Connected with another reducer', 'Empty'],
+      },
+      {
+        type: 'input',
+        name: 'properties',
+        message: '(If you choose CRUD) Type properties separated by comma (,) (If dont, just press enter)',
       },
     ], // array of inquirer prompts
     actions: (data) => {
@@ -110,7 +141,7 @@ module.exports = function (plop) {
             {
               type: 'add',
               path: '../app/containers/{{properCase name}}Page/components/{{properCase name}}Form/index.js',
-              templateFile: './container/components/EntityForm/index.js.hbs',
+              templateFile: './form/index.js.hbs',
               abortOnFail: true,
             },
             {
