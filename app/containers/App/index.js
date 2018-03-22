@@ -7,7 +7,6 @@ import './style.less';
 
 import injectSaga from '../../utils/injectSaga';
 
-import CommentPage from '../CommentPage/loadable';
 import PostPage from '../PostPage/loadable';
 import ContactPage from '../ContactPage/loadable';
 import LoginPage from '../LoginPage/loadable';
@@ -23,7 +22,6 @@ class App extends Component {
       <Switch>
         <Route exact path="/login" component={LoginPage} />
         <DefaultLayout exact path="/contact" component={ContactPage} />
-        <DefaultLayout exact path="/comments" component={CommentPage} />
         <PrivateDefaultLayout exact path="/" component={PostPage} />
       </Switch>
     );
