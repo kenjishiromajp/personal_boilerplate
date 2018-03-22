@@ -4,6 +4,19 @@
 
 <a href="#"><img width="728" src="https://raw.githubusercontent.com/kenjishiromajp/personal_boilerplate/master/imgs/background_image.png" alt="Personal Boilerplate - AntDesign & Redux-Saga & React & Redux & PLOP" /></a>
 
+
+# How to run the example application?
+
+- First up jsonserver to use as mock server
+```
+npm run jsonserver
+```
+- Then start the application:
+
+```
+npm start
+```
+
 ### File structure
 ```
 app
@@ -51,16 +64,4 @@ generators // Where is the scripts and handlebars files to generate new componen
     └── withListOnly
 server
 └── middlewares
-```
-
-# How to run the example application?
-
-- First up jsonserver to use as mock server
-```
-npm run jsonserver
-```
-- Then start the application:
-
-```
-npm start
 ```
