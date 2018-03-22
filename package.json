@@ -5,6 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development node server",
+    "prod": "cross-env NODE_ENV=production node server",
     "jsonserver": "json-server --watch test-db.json --port 3004",
     "build": "cross-env NODE_ENV=production webpack --config configs/webpack.prod.config.js --color -p --progress --hide-modules",
     "format": "prettier-eslint --write \"app/**/*.js\" \"server/**/*.js\"",

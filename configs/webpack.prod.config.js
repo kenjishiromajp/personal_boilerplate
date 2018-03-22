@@ -39,6 +39,7 @@ module.exports = require('./_webpack.base.config')({
       threshold: 10240,
       minRatio: 0,
     }),
+
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       minify: {
