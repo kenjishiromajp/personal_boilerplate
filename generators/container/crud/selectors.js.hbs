@@ -1,5 +1,9 @@
 import { createSelector } from 'reselect';
+<<<<<<< HEAD
 import { denormalize{{ properCase name }}s } from './normalizr';
+=======
+import transformObjectToArray from '../../utils/transformObjectToArray';
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
 
 export const select{{ properCase name }}s = (state) => state.get('{{ camelCase name }}s');
 
@@ -10,5 +14,12 @@ export const makeSelectError = () =>
   createSelector(select{{ properCase name }}s, ({{ camelCase name }}State) => {{ camelCase name }}State.get('error'));
 
 export const makeSelect{{ properCase name }}s = () =>
+<<<<<<< HEAD
   createSelector(select{{ properCase name }}s, ({{ camelCase name }}State) =>
     denormalize{{ properCase name }}s({{ camelCase name }}State.get('{{ camelCase name }}s').toJS());
+=======
+  createSelector(select{{ properCase name }}s, ({{ camelCase name }}State) => {
+    const {{ camelCase name }}s = {{ camelCase name }}State.get('{{ camelCase name }}s');
+    return {{ camelCase name }}s ? transformObjectToArray({{ camelCase name }}s) : null;
+  });
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84

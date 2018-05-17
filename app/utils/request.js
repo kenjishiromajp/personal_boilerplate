@@ -45,7 +45,7 @@ export default function request(
     });
 }
 
-export function post(
+export function postRequest(
   url,
   body = {},
   _options = { headers: { 'Content-Type': 'application/json' } }
@@ -57,7 +57,7 @@ export function post(
   return request(url, 'POST', options);
 }
 
-export function patch(
+export function patchRequest(
   url,
   body = {},
   _options = { headers: { 'Content-Type': 'application/json' } }
@@ -69,7 +69,19 @@ export function patch(
   return request(url, 'PATCH', options);
 }
 
-export function requestDelete(
+export function putRequest(
+  url,
+  body = {},
+  _options = { headers: { 'Content-Type': 'application/json' } }
+) {
+  const options = {
+    ..._options,
+    body: JSON.stringify(body),
+  };
+  return request(url, 'PUT', options);
+}
+
+export function deleteRequest(
   url,
   _options = { headers: { 'Content-Type': 'application/json' } }
 ) {

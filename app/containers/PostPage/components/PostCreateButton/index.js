@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PostForm from '../PostForm';
-import './style.less';
 import { createPost } from '../../actions';
 
 class PostCreateButton extends Component {
@@ -56,7 +55,7 @@ class PostCreateButton extends Component {
             ref={(postform) => (this.postform = postform)}
             loading={loading}
             onCancel={() => this.toggleModal()}
-            onCreate={(postData) => this.submit(postData)}
+            onSubmit={(postData) => this.submit(postData)}
           />
         </Modal>
       </div>

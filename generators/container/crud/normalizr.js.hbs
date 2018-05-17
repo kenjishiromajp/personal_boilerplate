@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import { denormalize, normalize, schema } from 'normalizr';
+=======
+import { normalize, schema } from 'normalizr';
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
 
 const {{ camelCase name }}Schema = new schema.Entity('{{ camelCase name }}s');
 const {{ camelCase name }}ListSchema = [{{ camelCase name }}Schema];
 
+<<<<<<< HEAD
 export const normalize{{ properCase name}}s = (data) => normalize(data, {{ camelCase name }}ListSchema);
 
 export const denormalize{{ properCase name }}s = (data, entities) => {
@@ -14,3 +19,8 @@ export const denormalize{{ properCase name }}s = (data, entities) => {
   );
   return denormalizedData || [];
 };
+=======
+const normalize{{ properCase name}}s = (data) => normalize(data, {{ camelCase name }}ListSchema);
+
+export default normalize{{ properCase name }}s;
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84

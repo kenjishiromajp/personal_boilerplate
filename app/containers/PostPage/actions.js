@@ -8,6 +8,9 @@ import {
   CREATE_POST,
   CREATE_POST_ERROR,
   CREATE_POST_SUCCESS,
+  EDIT_POST,
+  EDIT_POST_ERROR,
+  EDIT_POST_SUCCESS,
 } from './constants';
 
 // POST LOAD
@@ -31,32 +34,7 @@ export function loadPostsError(error) {
     error,
   };
 }
-
 // END POST LOAD
-
-// REMOVE POST
-export function removePost(id) {
-  return {
-    type: REMOVE_POST,
-    id,
-  };
-}
-
-export function removePostError(error) {
-  return {
-    type: REMOVE_POST_ERROR,
-    error,
-  };
-}
-
-export function postRemoved(id) {
-  return {
-    type: REMOVE_POST_SUCCESS,
-    id,
-  };
-}
-
-// END REMOVE POST
 
 // CREATE POST
 export function createPost(post, resolve, reject) {
@@ -82,3 +60,52 @@ export function postCreated(post) {
   };
 }
 // END CREATE POST
+
+// EDIT POST
+export function editPost(post, resolve, reject) {
+  return {
+    type: EDIT_POST,
+    post,
+    resolve,
+    reject,
+  };
+}
+
+export function editPostError(error) {
+  return {
+    type: EDIT_POST_ERROR,
+    error,
+  };
+}
+
+export function postEdited(post) {
+  return {
+    type: EDIT_POST_SUCCESS,
+    post,
+  };
+}
+// END EDIT POST
+
+// REMOVE POST
+export function removePost(id) {
+  return {
+    type: REMOVE_POST,
+    id,
+  };
+}
+
+export function removePostError(error) {
+  return {
+    type: REMOVE_POST_ERROR,
+    error,
+  };
+}
+
+export function postRemoved(id) {
+  return {
+    type: REMOVE_POST_SUCCESS,
+    id,
+  };
+}
+
+// END REMOVE POST

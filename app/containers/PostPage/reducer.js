@@ -9,6 +9,9 @@ import {
   CREATE_POST,
   CREATE_POST_SUCCESS,
   CREATE_POST_ERROR,
+  EDIT_POST_SUCCESS,
+  EDIT_POST,
+  EDIT_POST_ERROR,
 } from './constants';
 
 const initialState = fromJS({
@@ -40,6 +43,14 @@ function postReducer(state = initialState, action) {
         .set('loading', false)
         .mergeDeep({ posts: { [action.post.id.toString()]: action.post } });
     case CREATE_POST_ERROR:
+      return state.set('loading', false).set('error', action.error);
+    case EDIT_POST:
+      return state.set('loading', true).set('error', null);
+    case EDIT_POST_SUCCESS:
+      return state
+        .set('loading', false)
+        .mergeDeep({ posts: { [action.post.id.toString()]: action.post } });
+    case EDIT_POST_ERROR:
       return state.set('loading', false).set('error', action.error);
     default:
       return state;

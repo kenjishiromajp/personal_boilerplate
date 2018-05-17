@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Button, Checkbox, Form, Icon, Input } from 'antd';
+import { Button, Form, Icon, Input } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { Helmet } from 'react-helmet';
 
@@ -20,13 +20,6 @@ const FormItem = Form.Item;
 
 class LoginPage extends Component {
   state = {};
-  renderHead() {
-    return (
-      <Helmet>
-        <title>LoginPage</title>
-      </Helmet>
-    );
-  }
   handleSubmit = (ev) => {
     ev.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -36,6 +29,13 @@ class LoginPage extends Component {
       }
     });
   };
+  renderHead() {
+    return (
+      <Helmet>
+        <title>LoginPage</title>
+      </Helmet>
+    );
+  }
   render() {
     const { renderHead } = this;
     const { getFieldDecorator } = this.props.form;
@@ -84,7 +84,10 @@ class LoginPage extends Component {
   }
 }
 
-LoginPage.propTypes = {};
+LoginPage.propTypes = {
+  form: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = createStructuredSelector({});
 

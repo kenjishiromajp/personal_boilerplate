@@ -4,8 +4,12 @@ module.exports = function (plop) {
     const finalText = text.slice(0, 1).toUpperCase() + text.slice(1);
     return `${finalText}Page`;
   });
+<<<<<<< HEAD
   plop.setHelper('transformInArray', (text) =>
     text.split(',').map((str) => str.trim()));
+=======
+  plop.setHelper('transformInArray', (text) => text.split(',').map((str) => str.trim()));
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
   // create your generators here
   plop.setGenerator('Component', {
     description: 'Create a simple Component',
@@ -55,10 +59,39 @@ module.exports = function (plop) {
   });
   plop.setGenerator('Form', {
     description: 'Create a simple Form',
+<<<<<<< HEAD
+=======
+    prompts: [{
+      type: 'input',
+      name: 'name',
+      message: 'What is the name of Entity?',
+    },
+    {
+      type: 'input',
+      name: 'properties',
+      message: 'Type properties separated by comma (,)',
+    }],
+    actions: [{
+      type: 'add',
+      path: '../app/components/{{properCase name}}Form/style.less',
+      templateFile: './component/style.less.hbs',
+      abortOnFail: true,
+    },
+    {
+      type: 'add',
+      path: '../app/components/{{properCase name}}Form/index.js',
+      templateFile: './form/index.js.hbs',
+      abortOnFail: true,
+    }],
+  });
+  plop.setGenerator('Page Container', {
+    description: 'Create a simple Page Container',
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
     prompts: [
       {
         type: 'input',
         name: 'name',
+<<<<<<< HEAD
         message: 'What is the name of Entity?',
       },
       {
@@ -104,16 +137,35 @@ module.exports = function (plop) {
           'With CRUD of some entity',
           'Empty',
         ],
+=======
+        message: 'What is the name of your page?',
+      },
+      {
+        type: 'confirm',
+        name: 'isPrivate',
+        message: 'is It a Private Page?',
+      },
+      {
+        type: 'list',
+        name: 'typeEnhancement',
+        message: 'Select the enhancement that you want',
+        choices: () => ['With CRUD of some entity', 'Connected with another reducer', 'Empty'],
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
       },
       {
         type: 'input',
         name: 'properties',
+<<<<<<< HEAD
         message:
           '(If you choose CRUD) Type properties separated by comma (,) (If dont, just press enter)',
+=======
+        message: '(If you choose CRUD) Type properties separated by comma (,) (If dont, just press enter)',
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
       },
     ], // array of inquirer prompts
     actions: (data) => {
       const { typeEnhancement } = data;
+<<<<<<< HEAD
       let actions = [
         {
           type: 'add',
@@ -124,6 +176,16 @@ module.exports = function (plop) {
       ];
       switch (typeEnhancement) {
         case 'Just with a List':
+=======
+      let actions = [{
+        type: 'add',
+        path: '../app/containers/{{pageCase name}}/loadable.js',
+        templateFile: './container/loadable.js.hbs',
+        abortOnFail: true,
+      }];
+      switch (typeEnhancement) {
+        case 'Connected with another reducer':
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
           actions = [
             ...actions,
             {
@@ -132,6 +194,7 @@ module.exports = function (plop) {
               templateFile: './container/withListOnly/index.js.hbs',
               abortOnFail: true,
             },
+<<<<<<< HEAD
             {
               type: 'add',
               path: '../app/containers/{{properCase name}}Page/actions.js',
@@ -168,6 +231,8 @@ module.exports = function (plop) {
               templateFile: './container/withListOnly/selectors.js.hbs',
               abortOnFail: true,
             },
+=======
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
           ];
           break;
         case 'With CRUD of some entity':
@@ -181,31 +246,49 @@ module.exports = function (plop) {
             },
             {
               type: 'add',
+<<<<<<< HEAD
               path:
                 '../app/containers/{{properCase name}}Page/components/{{properCase name}}CreateButton/index.js',
               templateFile:
                 './container/components/EntityCreateButton/index.js.hbs',
+=======
+              path: '../app/containers/{{properCase name}}Page/components/{{properCase name}}CreateButton/index.js',
+              templateFile: './container/components/EntityCreateButton/index.js.hbs',
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
               abortOnFail: true,
             },
             {
               type: 'add',
+<<<<<<< HEAD
               path:
                 '../app/containers/{{properCase name}}Page/components/{{properCase name}}EditButton/index.js',
               templateFile:
                 './container/components/EntityEditButton/index.js.hbs',
+=======
+              path: '../app/containers/{{properCase name}}Page/components/{{properCase name}}EditButton/index.js',
+              templateFile: './container/components/EntityEditButton/index.js.hbs',
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
               abortOnFail: true,
             },
             {
               type: 'add',
+<<<<<<< HEAD
               path:
                 '../app/containers/{{properCase name}}Page/components/{{properCase name}}Form/index.js',
+=======
+              path: '../app/containers/{{properCase name}}Page/components/{{properCase name}}Form/index.js',
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
               templateFile: './form/index.js.hbs',
               abortOnFail: true,
             },
             {
               type: 'add',
+<<<<<<< HEAD
               path:
                 '../app/containers/{{properCase name}}Page/components/{{properCase name}}List/index.js',
+=======
+              path: '../app/containers/{{properCase name}}Page/components/{{properCase name}}List/index.js',
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
               templateFile: './container/components/EntityList/index.js.hbs',
               abortOnFail: true,
             },
@@ -268,6 +351,7 @@ module.exports = function (plop) {
           break;
       }
       return actions;
+<<<<<<< HEAD
     },
   });
   plop.setGenerator('Form Container', {
@@ -391,6 +475,8 @@ module.exports = function (plop) {
           abortOnFail: true,
         },
       ];
+=======
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
     },
   });
 };

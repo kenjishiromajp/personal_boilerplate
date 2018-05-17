@@ -4,13 +4,18 @@
 *
 */
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { Card } from 'antd';
+=======
+import { Card, Row } from 'antd';
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 
+<<<<<<< HEAD
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
 import {
@@ -26,6 +31,9 @@ class {{ properCase name }}Page extends Component {
   componentDidMount() {
     this.props.load{{ properCase name }}s();
   }
+=======
+class {{ properCase name }}Page extends Component {
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
   renderHead() {
     return (
       <Helmet>
@@ -38,9 +46,17 @@ class {{ properCase name }}Page extends Component {
     return (
       <div className="{{ dashCase name }}-page">
         {renderHead()}
+<<<<<<< HEAD
         <h1>{{ properCase name }} Page</h1>
         <Card>
 
+=======
+        <Row type="flex" justify="space-between" align="middle">
+          <h1>{{ properCase name }} Page</h1>
+        </Row>
+        <Card>
+          //TODO: Put a list here
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
         </Card>
       </div>
     );
@@ -48,6 +64,7 @@ class {{ properCase name }}Page extends Component {
 }
 
 {{ properCase name }}Page.propTypes = {
+<<<<<<< HEAD
   error: PropTypes.object,
   {{ camelCase name }}s: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -68,3 +85,15 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: '{{ camelCase name }}s', reducer });
 const withSaga = injectSaga({ key: '{{ camelCase name }}s', saga });
 export default compose(withReducer, withSaga, withConnect)({{ properCase name }}Page);
+=======
+};
+
+const mapStateToProps = createStructuredSelector({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+export default compose(withConnect)({{ properCase name }}Page);
+>>>>>>> 2139a24f8ae639e91cb9f65a0d14cc136c8bfb84
