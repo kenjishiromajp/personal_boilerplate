@@ -11,4 +11,10 @@ export const makeSelectError = () =>
 
 export const makeSelect{{ properCase name }}s = () =>
   createSelector(select{{ properCase name }}s, ({{ camelCase name }}State) =>
-    denormalize{{ properCase name }}s({{ camelCase name }}State.get('{{ camelCase name }}s').toJS());
+    denormalize{{ properCase name }}s({{ camelCase name }}State.get('{{ camelCase name }}s').toJS()));
+
+export const makeSelectLimit = () =>
+  createSelector(select{{ properCase name }}s, ({{ camelCase name }}State) => {{ camelCase name }}State.get('limit'));
+
+export const makeSelectTotalCount = () =>
+  createSelector(select{{ properCase name }}s, ({{ camelCase name }}State) => {{ camelCase name }}State.get('totalCount'));

@@ -10,10 +10,8 @@ const themeVariables = lessToJs(fs.readFileSync(path.join(__dirname, '../app/ant
 // const host = customHost || 'localhost';
 
 module.exports = (options) => ({
-  entry: [
-    ...options.entry,
-    'babel-polyfill',
-  ],
+  ...options,
+  entry: ['babel-polyfill', ...options.entry],
   output: Object.assign(
     {
       path: path.resolve(process.cwd(), 'build'),
@@ -23,6 +21,17 @@ module.exports = (options) => ({
   ),
   module: {
     rules: [
+      {
+        type: 'javascript/auto',
+        test: /\.json$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+          },
+        },
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -105,6 +114,7 @@ module.exports = (options) => ({
       // make fetch available
       fetch: 'exports-loader?self.fetch!whatwg-fetch',
     }),
+
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; UglifyJS will automatically
     // drop any unreachable code.
@@ -116,6 +126,9 @@ module.exports = (options) => ({
     new webpack.NamedModulesPlugin(),
   ]),
   resolve: {
+    alias: {
+      moment$: 'moment/moment.js',
+    },
     modules: ['app', 'node_modules'],
     extensions: ['.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main'],

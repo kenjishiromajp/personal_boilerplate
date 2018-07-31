@@ -6,27 +6,21 @@ import { createStructuredSelector } from 'reselect';
 import { Redirect } from 'react-router-dom';
 import DefaultLayout from '../DefaultLayout';
 import { makeSelectCurrentUser } from '../../containers/LoginPage/selectors';
-import { isValidUser, checkInvalidRole } from '../../utils/authentication';
+import { isValidUser } from '../../utils/authentication';
 
-const PrivateDefaultLayout = ({
-  user,
-  notAllowedRoles,
-  component: Component,
-  ...rest
-}) => {
+const AdminDefaultLayout = ({ user, component: Component, ...rest }) => {
   if (!isValidUser(user)) {
     return <Redirect to="/login" />;
   }
-  if (notAllowedRoles && checkInvalidRole(user.role, notAllowedRoles)) {
+  if (user.role === 'user') {
     return <Redirect to="/" />;
   }
   return <DefaultLayout {...rest} component={Component} />;
 };
 
-PrivateDefaultLayout.propTypes = {
+AdminDefaultLayout.propTypes = {
   user: PropTypes.object.isRequired,
   component: PropTypes.func.isRequired,
-  notAllowedRoles: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -34,4 +28,4 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
-export default compose(withConnect)(PrivateDefaultLayout);
+export default compose(withConnect)(AdminDefaultLayout);

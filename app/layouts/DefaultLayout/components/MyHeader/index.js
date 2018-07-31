@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout } from 'antd';
-const { Header } = Layout;
 import './style.less';
+
+const { Header } = Layout;
 
 const MyHeader = ({ children }) => (
   <Header className="my-header">{children}</Header>

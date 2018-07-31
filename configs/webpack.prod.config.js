@@ -1,45 +1,63 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = require('./_webpack.base.config')({
+  mode: 'production',
   entry: [path.join(process.cwd(), 'app/index.js')],
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 0,
+      maxAsyncRequests: Infinity,
+      maxInitialRequests: Infinity,
+      name: true,
+      cacheGroups: {
+        default: {
+          chunks: 'async',
+          minSize: 30000,
+          minChunks: 2,
+          maxAsyncRequests: 5,
+          maxInitialRequests: 3,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+        vendors: {
+          name: 'vendors',
+          enforce: true,
+          test: (module) =>
+            module.resource &&
+            (module.resource.startsWith(path.join(process.cwd(), 'node_modules')) ||
+              module.resource.startsWith(path.join(process.cwd(), 'vendor'))),
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        commons: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2,
+          test: (module) =>
+            module.resource &&
+            module.resource.startsWith(path.join(process.cwd(), 'src')),
+          priority: -5,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
   plugins: [
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      children: true,
-      minChunks: 2,
-      async: true,
+    new LodashModuleReplacementPlugin({
+      caching: true,
+      collections: true,
+      paths: true,
+      shorthands: true,
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: true,
-      compress: {
-        warnings: false, // Suppress uglification warnings
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-      },
-      exclude: [/\.min\.js$/gi] // skip pre-minified libs
-    }),
-    new CompressionPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0,
-    }),
-
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       minify: {
@@ -57,6 +75,9 @@ module.exports = require('./_webpack.base.config')({
       inject: true,
     }),
     new OfflinePlugin({
+      ServiceWorker: {
+        minify: false,
+      },
       relativePaths: false,
       publicPath: '/',
       excludes: ['.htaccess'],
@@ -66,6 +87,10 @@ module.exports = require('./_webpack.base.config')({
       },
       safeToUseOptionalCaches: true,
       AppCache: false,
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      generateStatsFile: true,
     }),
   ],
   performance: {

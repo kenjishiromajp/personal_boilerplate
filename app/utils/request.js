@@ -1,89 +1,91 @@
 import 'whatwg-fetch';
+import { stringify } from 'qs';
+import {
+  CONTENT_TYPE_APPLICATION_JSON,
+  CONTENT_TYPE_FORM_DATA,
+} from './constants';
 
-export function getAuthHeaders() {
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (user && user.token) {
-    return {
-      Authorization: `Authorization ${user.token}`,
-    };
+export class RequestError extends Error {
+  constructor(message, response) {
+    super(message);
+    this.response = response;
   }
-  return {};
 }
 
-export default function request(
+export const getRequest = (url, searchParams) => {
+  let newURL = url;
+  if (searchParams) {
+    const newSearchParams = stringify(searchParams, { arrayFormat: 'indices' });
+    newURL = `${url}?${newSearchParams}`;
+  }
+  return request(newURL, {
+    method: 'GET',
+  });
+};
+
+export const postRequest = (url, body, options) =>
+  request(url, {
+    ...options,
+    body,
+    method: 'POST',
+  });
+
+export const patchRequest = (url, body) =>
+  request(url, {
+    method: 'PATCH',
+    body,
+  });
+
+export const putRequest = (url, body) =>
+  request(url, {
+    method: 'PUT',
+    body,
+  });
+
+export const deleteRequest = (url, body) =>
+  request(url, {
+    method: 'DELETE',
+    body,
+  });
+
+const request = (
   url,
-  method = 'GET',
-  _options = { headers: { 'Content-Type': 'application/json' } }
-) {
-  let options = _options;
-  if (options.headers) {
-    options = {
-      ...options,
-      method,
-      headers: {
-        ...getAuthHeaders(),
-        ...options.headers,
-      },
-    };
-  } else {
-    options = {
-      ...options,
-      headers: getAuthHeaders(),
-    };
+  { contentType = CONTENT_TYPE_APPLICATION_JSON, ...customOptions }
+) => {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  let userToken = {};
+  if (currentUser) {
+    userToken = currentUser.token ? currentUser.token : null;
   }
 
-  return fetch(url, options)
+  const headers = {
+    Authorization: `Bearer ${userToken}`,
+  };
+
+  if (contentType) {
+    headers['Content-type'] = contentType;
+  }
+
+  const options = {
+    ...customOptions,
+    headers,
+  };
+
+  const newOptions = options;
+  if (newOptions.body) {
+    newOptions.body =
+      contentType === CONTENT_TYPE_FORM_DATA
+        ? newOptions.body
+        : JSON.stringify(newOptions.body);
+  }
+  return fetch(url, newOptions)
     .then((response) => {
-      if (response.status >= 200 && response.status < 300) return response;
-      const error = new Error(response.statusText);
-      error.response = response;
-      throw error;
+      if (response.status.toString().match(/^4/)) {
+        throw new RequestError(`${response.status} Error`, response);
+      }
+      return Promise.resolve(response.json());
     })
-    .then((response) => {
-      if (response.status === 204 || response.status === 205) return null;
-      return response.json();
+    .catch((error) => {
+      throw new RequestError(error.message, { status: 500 });
     });
-}
-
-export function postRequest(
-  url,
-  body = {},
-  _options = { headers: { 'Content-Type': 'application/json' } }
-) {
-  const options = {
-    ..._options,
-    body: JSON.stringify(body),
-  };
-  return request(url, 'POST', options);
-}
-
-export function patchRequest(
-  url,
-  body = {},
-  _options = { headers: { 'Content-Type': 'application/json' } }
-) {
-  const options = {
-    ..._options,
-    body: JSON.stringify(body),
-  };
-  return request(url, 'PATCH', options);
-}
-
-export function putRequest(
-  url,
-  body = {},
-  _options = { headers: { 'Content-Type': 'application/json' } }
-) {
-  const options = {
-    ..._options,
-    body: JSON.stringify(body),
-  };
-  return request(url, 'PUT', options);
-}
-
-export function deleteRequest(
-  url,
-  _options = { headers: { 'Content-Type': 'application/json' } }
-) {
-  return request(url, 'DELETE', _options);
-}
+};
